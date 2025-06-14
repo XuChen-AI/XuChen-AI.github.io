@@ -1,0 +1,79 @@
+{
+    "personalInfo": {
+        "userName": "您的姓名",
+        "userBio": "在这里写您的个人简介。例如：一名对人工智能和计算机视觉充满热情的学者。目前专注于深度学习在医学影像分析和自动驾驶领域的应用。",
+        "avatarImageUrl": "assets/images/avatar.png",
+        "headerBackgroundImageUrl": "assets/images/background.jpg",
+        "email": "your.email@example.com",
+        "university": "您的大学",
+        "department": "您的学院/系"
+    },
+    "siteSettings": {
+        "title": "个人学术主页",
+        "description": "这是我的个人学术主页，展示我的研究项目和学术成果。",
+        "keywords": "人工智能, 深度学习, 计算机视觉, 学术研究"
+    },    "projects": [
+        {
+            "id": "project1",
+            "thumbnailUrl": "assets/images/project1-thumb.jpg",
+            "title": "项目一：AI辅助诊断系统",
+            "shortDescription": "利用深度学习技术，辅助医生进行早期疾病诊断。准确率达到95%以上。",
+            "detailPageUrl": "projects/project1.html",
+            "detailContent": {
+                "images": [
+                    "projects/project1/images/demo1.jpg",
+                    "projects/project1/images/architecture.jpg"
+                ],
+                "fullDescription": "<p>这是项目一的详细描述。我们使用了先进的深度学习模型，例如 CNN 和 RNN，来分析医学影像数据。</p><p>系统的准确率达到了95%，有效提高了早期诊断的效率。主要技术包括：</p><ul><li>深度卷积神经网络（CNN）</li><li>递归神经网络（RNN）</li><li>数据增强技术</li><li>迁移学习</li></ul>",
+                "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                "githubUrl": "https://github.com/your-username/ai-diagnosis-system",
+                "paperUrl": "https://arxiv.org/abs/xxxx.xxxx",
+                "tags": ["深度学习", "医学影像", "AI诊断"]
+            }
+        },
+        {
+            "id": "project2",
+            "thumbnailUrl": "assets/images/project2-thumb.jpg",
+            "title": "项目二：个性化学习推荐引擎",
+            "shortDescription": "根据学生的学习行为和偏好，智能推荐学习资源，提升学习效率。",
+            "detailPageUrl": "projects/project2.html",
+            "detailContent": {
+                "images": [
+                    "projects/project2/images/system-overview.jpg",
+                    "projects/project2/images/results.jpg"
+                ],
+                "fullDescription": "<p>项目二专注于构建一个智能学习推荐系统。通过分析用户的学习历史和偏好，系统能够动态调整推荐内容。</p><p>主要创新点：</p><ul><li>多模态学习行为分析</li><li>个性化推荐算法</li><li>实时学习效果评估</li></ul>",
+                "videoUrl": null,
+                "githubUrl": "https://github.com/your-username/learning-recommendation",
+                "paperUrl": null,
+                "tags": ["推荐系统", "个性化学习", "数据挖掘"]
+            }
+        },
+        {
+            "id": "project3",
+            "thumbnailUrl": "assets/images/project3-thumb.jpg",
+            "title": "项目三：自动驾驶感知算法研究",
+            "shortDescription": "研究和开发用于自动驾驶汽车的高精度环境感知算法，支持复杂场景识别。",
+            "detailPageUrl": "projects/project3.html",
+            "detailContent": {
+                "images": [
+                    "projects/project3/images/perception-pipeline.jpg",
+                    "projects/project3/images/detection-results.jpg",
+                    "projects/project3/images/dataset.jpg"
+                ],
+                "fullDescription": "<p>本项目旨在提升自动驾驶汽车在复杂环境下的感知能力。我们重点研究了多传感器融合技术。</p><p>研究成果：</p><ul><li>多传感器数据融合算法</li><li>实时目标检测与跟踪</li><li>3D点云处理技术</li><li>恶劣天气下的鲁棒性增强</li></ul>",
+                "videoUrl": "https://www.youtube.com/embed/another-video-id",
+                "githubUrl": "https://github.com/your-username/autonomous-perception",
+                "paperUrl": "https://arxiv.org/abs/yyyy.yyyy",
+                "tags": ["自动驾驶", "计算机视觉", "传感器融合"]
+            }
+        }
+    ],
+    "socialLinks": {
+        "github": "https://github.com/your-username",
+        "linkedin": "https://linkedin.com/in/your-profile",
+        "googleScholar": "https://scholar.google.com/citations?user=your-id",
+        "orcid": "https://orcid.org/0000-0000-0000-0000",
+        "researchGate": "https://www.researchgate.net/profile/your-profile"
+    }
+}

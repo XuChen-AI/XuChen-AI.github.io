@@ -1,0 +1,261 @@
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 头部背景 */
+#main-header {
+    height: 300px; /* 背景高度，可根据需要调整 */
+    background-size: cover;
+    background-position: center;
+    position: relative; /* 用于定位其他元素 */
+}
+
+/* 主内容区域 */
+main {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* 个人资料区域 */
+#profile {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: -100px; /* 使其部分覆盖在背景图上 */
+    position: relative; /* 确保在背景图之上 */
+    z-index: 1;
+}
+
+/* 圆形头像 */
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px auto; /* 居中并与下方内容保持距离 */
+    border: 5px solid #fff; /* 白色边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 轻微阴影 */
+}
+
+#avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保图片填满容器且不变形 */
+}
+
+#user-name {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#user-bio {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* 项目区域 */
+#projects-section {
+    margin-bottom: 40px;
+}
+
+#projects-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* 项目网格布局 */
+#projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 响应式网格 */
+    gap: 20px;
+}
+
+/* 单个项目卡片 */
+.project-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* 确保图片圆角生效 */
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* 鼠标悬停时轻微上移 */
+}
+
+.project-thumbnail {
+    width: 100%;
+    height: 180px; /* 固定高度 */
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 15px;
+}
+
+.project-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #007bff; /* 项目标题颜色 */
+}
+
+.project-info p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.project-info a {
+    text-decoration: none;
+    color: inherit; /* 继承父元素颜色 */
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+/* 项目详情页样式 (project-detail.css) */
+.project-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.project-detail-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.project-detail-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 4px;
+}
+
+.project-detail-container p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.project-video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.project-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: #0056b3;
+}
+
+/* 项目标签样式 */
+.project-tags {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 4px 12px;
+    margin: 0 5px 5px 0;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* 项目链接按钮样式 */
+.project-links {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.project-link-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid;
+}
+
+.github-btn {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+.github-btn:hover {
+    background-color: #555;
+    border-color: #555;
+    transform: translateY(-2px);
+}
+
+.paper-btn {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.paper-btn:hover {
+    background-color: #218838;
+    border-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* 项目描述样式 */
+.project-description {
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+.project-description ul {
+    padding-left: 20px;
+}
+
+.project-description li {
+    margin-bottom: 8px;
+}

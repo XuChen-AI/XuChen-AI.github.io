@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人学术主页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 1. 可替换的背景 -->
+    <header id="main-header" style="background-image: url('assets/images/background.jpg');">
+        <!-- 背景图片通过 CSS 设置，方便替换 -->
+    </header>
+
+    <main>
+        <section id="profile">
+            <!-- 3. 可替换的圆形头像 -->
+            <div class="avatar-container">
+                <img src="assets/images/avatar.png" alt="个人头像" id="avatar">
+            </div>
+            <!-- 4. 名字和个人简介 -->
+            <h1 id="user-name">您的名字</h1>
+            <p id="user-bio">这里是您的个人简介。介绍您的研究方向、兴趣等。</p>
+        </section>
+
+        <section id="projects-section">
+            <h2>项目经历</h2>
+            <div id="projects-grid">
+                <!-- 项目将通过 JavaScript 动态加载 -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> 您的名字. 保留所有权利.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
