@@ -766,3 +766,47 @@ footer a:hover {
         height: auto; /* 保持比例 */
     }
 }
+
+/* ==========================================
+ * 9. 项目背景图片样式
+ * ==========================================
+ * 项目详情页面顶部背景图片的样式
+ */
+
+/* 项目背景图片容器 */
+.project-background-image {
+    width: 100%; /* 全宽显示 */
+    margin: 20px 0 30px 0; /* 顶部和底部边距 */
+    border-radius: 12px; /* 圆角 */
+    overflow: hidden; /* 隐藏超出部分 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* 较明显的阴影效果 */
+}
+
+/* 项目背景图片样式 */
+.project-bg-img {
+    width: 100%; /* 全宽显示 */
+    height: auto; /* 保持图片比例 */
+    display: block; /* 块级显示 */
+    transition: transform 0.3s ease; /* 平滑的变换动画 */
+}
+
+/* 项目背景图片悬停效果 */
+.project-background-image:hover .project-bg-img {
+    transform: scale(1.02); /* 轻微放大效果 */
+}
+
+/* 移动端项目背景图片调整 */
+@media (max-width: 768px) {
+    .project-background-image {
+        margin: 15px 0 20px 0; /* 减少边距 */
+        border-radius: 8px; /* 较小圆角 */
+    }
+}
+
+/* 小屏幕设备项目背景图片调整 */
+@media (max-width: 480px) {
+    .project-background-image {
+        margin: 10px 0 15px 0; /* 进一步减少边距 */
+        border-radius: 6px; /* 更小圆角 */
+    }
+}

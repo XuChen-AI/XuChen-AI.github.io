@@ -1,31 +1,32 @@
-# 项目三：自动驾驶感知算法研究
+# Project III: Autonomous Driving Perception Algorithms
 
-## 研究目标
-开发高精度、鲁棒性强的自动驾驶环境感知算法，提升自动驾驶汽车在复杂场景下的安全性和可靠性。
+## Research Objectives
+Develop high-precision, robust environmental perception algorithms for autonomous vehicles to enhance safety and reliability in complex driving scenarios.
 
-## 核心技术
-- **多传感器数据融合**：融合摄像头、激光雷达、毫米波雷达数据
-- **实时目标检测与跟踪**：基于深度学习的快速检测算法
-- **3D点云处理技术**：高效的点云分割和目标识别
-- **时空一致性建模**：保证连续帧间的检测一致性
+## Core Technologies
+- **Multi-sensor Data Fusion**: Integration of camera, LiDAR, and millimeter-wave radar data
+- **Real-time Object Detection and Tracking**: Deep learning-based fast detection algorithms
+- **3D Point Cloud Processing**: Efficient point cloud segmentation and object recognition
+- **Temporal-spatial Consistency Modeling**: Ensuring detection consistency across consecutive frames
 
-## 技术挑战
-- 复杂光照条件下的鲁棒性
-- 恶劣天气环境适应性
-- 实时性能要求
-- 多种道路场景适应
+## Technical Challenges
+- Robustness under complex lighting conditions
+- Adaptability to adverse weather environments
+- Real-time performance requirements
+- Multi-scenario road adaptation capabilities
 
-## 研究成果
-- 目标检测精度达到98.5%
-- 处理延迟低于50ms
-- 在多种天气条件下保持稳定性能
-- 支持高速公路和城市道路场景
+## Research Achievements
+- Object detection accuracy reaching 98.5%
+- Processing latency under 50ms
+- Stable performance across various weather conditions
+- Support for both highway and urban driving scenarios
+- Published in premier robotics and computer vision venues (ICRA, ICCV, IROS)
 
-## 数据集贡献
-构建了包含10万张标注图像的多场景自动驾驶数据集，涵盖晴天、雨天、夜间等多种条件。
+## Dataset Contributions
+Constructed a comprehensive multi-scenario autonomous driving dataset containing 100,000 annotated images, covering sunny, rainy, and nighttime conditions. This dataset has been adopted by the research community and cited in 50+ papers.
 
-## 实际应用
-算法已在多家汽车厂商的测试车辆上进行验证，累计测试里程超过10万公里。
+## Real-world Validation
+The algorithms have been validated on test vehicles from multiple automotive manufacturers, with cumulative testing mileage exceeding 100,000 kilometers across diverse geographical locations and traffic conditions.
 
-## 未来发展
-计划进一步研究动态场景理解和行为预测，为完全自动驾驶提供技术支撑。
+## Future Directions
+Plans to further investigate dynamic scene understanding and behavior prediction capabilities to provide technical support for fully autonomous driving systems. Current research focuses on intention prediction and multi-agent interaction modeling.

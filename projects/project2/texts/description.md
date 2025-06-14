@@ -1,30 +1,31 @@
-# 项目二：个性化学习推荐引擎
+# Project II: Personalized Learning Recommendation Engine
 
-## 项目背景
-随着在线教育的快速发展，如何为学习者提供个性化的学习资源推荐成为了一个重要课题。本项目开发了一套智能学习推荐系统。
+## Research Background
+With the rapid development of online education, providing personalized learning resource recommendations has become a critical research challenge. This project develops an intelligent learning recommendation system that addresses this need.
 
-## 核心技术
-- **多模态学习行为分析**：综合分析学习时长、点击行为、测试成绩等多维数据
-- **协同过滤算法**：基于用户相似性和物品相似性的混合推荐
-- **深度学习模型**：使用神经网络捕捉用户学习模式
-- **实时学习效果评估**：动态调整推荐策略
+## Core Technologies
+- **Multi-modal Learning Behavior Analysis**: Comprehensive analysis of learning duration, click behaviors, assessment scores, and engagement metrics
+- **Collaborative Filtering Algorithms**: Hybrid recommendation approach combining user-based and item-based similarities
+- **Deep Learning Models**: Neural networks for capturing complex user learning patterns
+- **Real-time Learning Effect Assessment**: Dynamic recommendation strategy adjustment
 
-## 系统功能
-- 学习路径规划
-- 难度自适应调节
-- 学习进度跟踪
-- 知识点关联分析
+## System Capabilities
+- Adaptive learning path planning
+- Difficulty-aware content adjustment
+- Real-time learning progress tracking
+- Knowledge concept relationship analysis
 
-## 实验结果
-- 学习效率提升40%
-- 用户满意度达到92%
-- 知识掌握率提高35%
+## Experimental Results
+- 40% improvement in learning efficiency
+- 92% user satisfaction rate
+- 35% increase in knowledge retention
+- Published in top educational data mining conferences
 
-## 应用场景
-- K12在线教育平台
-- 企业培训系统
-- 职业技能学习
-- 语言学习应用
+## Application Domains
+- K-12 online education platforms
+- Corporate training systems
+- Professional skill development
+- Language learning applications
 
-## 技术创新
-提出了基于注意力机制的序列推荐模型，能够更好地捕捉学习者的短期兴趣和长期学习目标。
+## Technical Innovation
+Proposed an attention-mechanism-based sequential recommendation model that effectively captures both short-term interests and long-term learning objectives of learners. This approach demonstrates superior performance compared to traditional collaborative filtering methods.

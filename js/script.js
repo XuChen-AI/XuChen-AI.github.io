@@ -398,11 +398,16 @@ function renderProjectDetails(project) {
     }
     
     console.log('开始渲染项目详情:', project.title);
-    
-    // 更新页面标题
-    document.title = project.title + " - 项目详情";
-    
-    let htmlContent = `<h1>${project.title}</h1>`;
+      // 更新页面标题
+    document.title = project.title + " - Project Details";
+      let htmlContent = `<h1>${project.title}</h1>`;    // 添加项目背景图片
+    const projectBgPath = `../projects/${project.id}/images/${project.id}-bg.svg`;
+    htmlContent += `
+        <div class="project-background-image">
+            <img src="${projectBgPath}" alt="${project.title} Background Image" class="project-bg-img" onerror="this.style.display='none'">
+        </div>
+    `;
+    console.log('项目背景图片已添加:', projectBgPath);
     
     // 添加项目标签（如果存在）
     if (project.detailContent.tags && project.detailContent.tags.length > 0) {
@@ -443,20 +448,20 @@ function renderProjectDetails(project) {
         htmlContent += `<div class="project-description">${project.detailContent.fullDescription}</div>`;
         console.log('项目描述已添加');
     }
-    
-    // 添加本地视频文件
+      // 添加本地视频文件
     if (project.detailContent.videos && project.detailContent.videos.length > 0) {
-        htmlContent += '<div class="project-videos"><h3>项目演示视频</h3>';
+        htmlContent += '<div class="project-videos"><h3>Project Demo Videos</h3>';
         project.detailContent.videos.forEach((videoPath, index) => {
             htmlContent += `
                 <div class="video-container">
                     <video controls width="100%" style="max-width: 800px;">
                         <source src="../${videoPath}" type="video/mp4">
-                        您的浏览器不支持视频播放。
+                        Your browser does not support video playback.
                     </video>
-                    <p class="video-caption">视频 ${index + 1}: ${videoPath.split('/').pop()}</p>
+                    <p class="video-caption">Video ${index + 1}: ${videoPath.split('/').pop()}</p>
                 </div>
-            `;        });
+            `;
+        });
         htmlContent += '</div>';
         console.log('本地视频已添加:', project.detailContent.videos.length, '个');
     }
@@ -464,23 +469,22 @@ function renderProjectDetails(project) {
     // 添加外部链接按钮
     if (project.detailContent.githubUrl || project.detailContent.paperUrl) {
         htmlContent += '<div class="project-links">';
-        
-        if (project.detailContent.githubUrl) {
-            htmlContent += `<a href="${project.detailContent.githubUrl}" target="_blank" class="project-link-btn github-btn">查看代码</a>`;
+          if (project.detailContent.githubUrl) {
+            htmlContent += `<a href="${project.detailContent.githubUrl}" target="_blank" class="project-link-btn github-btn">View Code</a>`;
         }
         
         if (project.detailContent.paperUrl) {
-            htmlContent += `<a href="${project.detailContent.paperUrl}" target="_blank" class="project-link-btn paper-btn">查看论文</a>`;
+            htmlContent += `<a href="${project.detailContent.paperUrl}" target="_blank" class="project-link-btn paper-btn">View Paper</a>`;
         }
-        
-        htmlContent += '</div>';        console.log('外部链接已添加');
+          htmlContent += '</div>';
+        console.log('外部链接已添加');
     }
     
     // 添加 YouTube 视频嵌入
     if (project.detailContent.videoUrl) {
         htmlContent += `
             <div class="project-video-container">
-                <h3>在线演示视频</h3>
+                <h3>Online Demo Video</h3>
                 <iframe src="${project.detailContent.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
@@ -488,7 +492,7 @@ function renderProjectDetails(project) {
     }
     
     // 添加返回主页的链接
-    htmlContent += `<a href="../index.html" class="back-link">返回主页</a>`;
+    htmlContent += `<a href="../index.html" class="back-link">Back to Homepage</a>`;
     
     // 将生成的HTML内容插入到页面中
     detailContainer.innerHTML = htmlContent;
@@ -507,20 +511,19 @@ function renderProjectNotFound() {
     }
     
     console.log('渲染项目未找到页面');
-    
-    detailContainer.innerHTML = `
-        <h1>项目未找到</h1>
-        <p>抱歉，未能找到您要查看的项目详情。可能的原因：</p>
+      detailContainer.innerHTML = `
+        <h1>Project Not Found</h1>
+        <p>Sorry, we couldn't find the project details you're looking for. Possible reasons:</p>
         <ul>
-            <li>项目ID不存在</li>
-            <li>项目数据配置错误</li>
-            <li>配置文件加载失败</li>
+            <li>Project ID does not exist</li>
+            <li>Project data configuration error</li>
+            <li>Configuration file loading failed</li>
         </ul>
-        <a href="../index.html" class="back-link">返回主页</a>
+        <a href="../index.html" class="back-link">Back to Homepage</a>
     `;
     
     // 更新页面标题
-    document.title = "项目未找到 - 错误页面";
+    document.title = "Project Not Found - Error Page";
 }
 
 /* ==========================================
