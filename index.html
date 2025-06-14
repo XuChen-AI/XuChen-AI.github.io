@@ -4,37 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人学术主页</title>
+    <!-- 引入主要样式文件 -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 1. 可替换的背景 -->
+    <!-- 
+    主页结构说明：
+    1. 顶部背景图片区域 (main-header)
+    2. 个人资料区域 (profile) - 包含头像、姓名、简介
+    3. 项目展示区域 (projects-section) - 动态加载项目卡片
+    4. 页脚区域 (footer)
+    -->
+    
+    <!-- 1. 可替换的背景图片区域 -->
+    <!-- 背景图片通过 CSS 的 background-image 属性设置，方便通过 JavaScript 动态替换 -->
     <header id="main-header" style="background-image: url('assets/images/background.jpg');">
-        <!-- 背景图片通过 CSS 设置，方便替换 -->
+        <!-- 此区域仅用于展示背景图片，不包含其他内容 -->
     </header>
 
     <main>
+        <!-- 2. 个人资料展示区域 -->
         <section id="profile">
             <!-- 3. 可替换的圆形头像 -->
             <div class="avatar-container">
+                <!-- 头像图片，通过 JavaScript 动态设置 src 属性 -->
                 <img src="assets/images/avatar.png" alt="个人头像" id="avatar">
             </div>
-            <!-- 4. 名字和个人简介 -->
+            
+            <!-- 4. 个人基本信息：姓名和简介 -->
+            <!-- 这些内容通过 JavaScript 从配置文件或默认配置中动态加载 -->
             <h1 id="user-name">您的名字</h1>
             <p id="user-bio">这里是您的个人简介。介绍您的研究方向、兴趣等。</p>
         </section>
 
+        <!-- 5. 项目展示区域 -->
         <section id="projects-section">
             <h2>项目经历</h2>
+            <!-- 项目网格容器，所有项目卡片将通过 JavaScript 动态插入到这里 -->
             <div id="projects-grid">
-                <!-- 项目将通过 JavaScript 动态加载 -->
+                <!-- 项目将通过 JavaScript 从配置文件中动态加载并显示 -->
+                <!-- 每个项目包含：缩略图、标题、简短描述，点击可进入详情页 -->
             </div>
         </section>
     </main>
 
+    <!-- 6. 页脚区域 -->
     <footer>
+        <!-- 版权信息，年份会通过 JavaScript 自动更新 -->
         <p>&copy; <span id="current-year"></span> 您的名字. 保留所有权利.</p>
     </footer>
 
+    <!-- 引入主要 JavaScript 文件 -->
+    <!-- 负责：配置加载、内容渲染、事件处理等核心功能 -->
     <script src="js/script.js"></script>
 </body>
 </html>
