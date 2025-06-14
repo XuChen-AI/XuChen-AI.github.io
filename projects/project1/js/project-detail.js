@@ -243,18 +243,39 @@ function removeInlineIcons(markdown) {
 function markdownToHtml(markdown) {
     if (!markdown) return '';
     
-    return markdown
+    // 首先处理多行内容，按双换行符分段
+    let html = markdown
+        // 处理标题
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+        // 处理粗体文本
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/^(?!<[h|u|l])(.*)$/gim, '<p>$1</p>')
-        .replace(/<p><\/p>/g, '')
-        .replace(/<p>(<[h|u])/g, '$1')
-        .replace(/(<\/[h|u][^>]*>)<\/p>/g, '$1');
+        // 处理列表项
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        // 按段落分割
+        .split('\n\n')
+        .map(paragraph => {
+            paragraph = paragraph.trim();
+            if (!paragraph) return '';
+            
+            // 如果段落包含标题标签，直接返回
+            if (paragraph.match(/^<h[1-6]>/)) {
+                return paragraph;
+            }
+            
+            // 如果段落包含列表项，包装在ul标签中
+            if (paragraph.includes('<li>')) {
+                return '<ul>' + paragraph + '</ul>';
+            }
+            
+            // 普通段落包装在p标签中
+            return '<p>' + paragraph + '</p>';
+        })
+        .filter(p => p.length > 0)
+        .join('\n');
+    
+    return html;
 }
 
 console.log('Project 1 JavaScript文件加载完成');

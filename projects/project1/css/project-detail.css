@@ -1,0 +1,351 @@
+/*
+ * ==========================================
+ * Project 1 Detail Page Styles
+ * ==========================================
+ * 
+ * 项目一详情页专用样式文件
+ * 包含项目详情页面的所有样式设计
+ */
+
+/* ==========================================
+ * 基础设置
+ * ==========================================
+ */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ==========================================
+ * 项目详情页主要样式
+ * ==========================================
+ */
+
+/* 项目详情页主容器 */
+.project-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 项目标题样式 */
+.project-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+
+/* 项目背景图片容器 */
+.project-background-image {
+    width: 100%;
+    margin: 20px 0 30px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 项目背景图片样式 */
+.project-bg-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* 项目背景图片悬停效果 */
+.project-background-image:hover .project-bg-img {
+    transform: scale(1.02);
+}
+
+/* 项目主图片样式 */
+.project-main-image {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.main-project-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.main-project-img:hover {
+    transform: scale(1.02);
+}
+
+/* ==========================================
+ * 项目资源样式
+ * ==========================================
+ */
+
+/* 项目资源容器 */
+.project-resources {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-resources h3 {
+    margin: 0 0 20px 0;
+    color: #495057;
+    font-size: 1.3em;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* 资源图标网格 */
+.resource-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* 单个资源项 */
+.resource-item {
+    text-align: center;
+}
+
+.resource-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.3s ease;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resource-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    color: #007bff;
+}
+
+.resource-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.resource-link:hover .resource-icon {
+    transform: scale(1.1);
+}
+
+.resource-link span {
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ==========================================
+ * 项目文本内容样式
+ * ==========================================
+ */
+
+/* 项目文本内容区域 */
+.project-text-content {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid #007bff;
+    line-height: 1.8;
+}
+
+/* 文本内容区域的标题样式 */
+.project-text-content h1,
+.project-text-content h2,
+.project-text-content h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* 文本内容区域的二级标题特殊样式 */
+.project-text-content h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+    margin-top: 25px;
+}
+
+/* 文本内容区域的列表样式 */
+.project-text-content ul {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.project-text-content li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.project-text-content p {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+/* ==========================================
+ * 方法框架图样式
+ * ==========================================
+ */
+
+.methodology-framework {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.methodology-framework h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.framework-image {
+    margin: 20px 0;
+}
+
+.framework-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.framework-img:hover {
+    transform: scale(1.02);
+}
+
+/* ==========================================
+ * 视频样式
+ * ==========================================
+ */
+
+.project-demo-video {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.project-demo-video h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.video-container {
+    margin-bottom: 25px;
+}
+
+.video-container video {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================
+ * 返回链接样式
+ * ==========================================
+ */
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+ * 响应式设计
+ * ==========================================
+ */
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .project-detail-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .project-title {
+        font-size: 2em;
+    }
+    
+    .project-background-image {
+        margin: 15px 0 20px 0;
+        border-radius: 8px;
+    }
+    
+    .project-resources {
+        padding: 20px;
+    }
+    
+    .resource-icons {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+    
+    .project-text-content {
+        padding: 20px;
+    }
+}
+
+/* 小屏幕设备适配 */
+@media (max-width: 480px) {
+    .project-detail-container {
+        margin: 5px;
+        padding: 10px;
+    }
+    
+    .project-title {
+        font-size: 1.8em;
+    }
+    
+    .project-background-image {
+        margin: 10px 0 15px 0;
+        border-radius: 6px;
+    }
+    
+    .resource-icons {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .project-text-content {
+        padding: 15px;
+    }
+}
