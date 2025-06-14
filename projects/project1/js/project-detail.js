@@ -91,11 +91,17 @@ function renderProjectDetails(project) {
     
     // 更新页面标题
     document.title = project.title + " - Project Details";
-    
-    // 1. 项目名称
+      // 1. 项目名称
     let htmlContent = `<h1 class="project-title">${project.title}</h1>`;
     
-    // 2. 项目主图片（使用第一张图片作为主图片）
+    // 2. 项目背景图片（在标题后面显示）
+    htmlContent += `
+        <div class="project-background-image">
+            <img src="images/${PROJECT_ID}-bg.svg" alt="${project.title} Background" class="project-bg-img" onerror="this.style.display='none'">
+        </div>
+    `;
+    
+    // 3. 项目主图片（使用第一张图片作为主图片）
     if (project.detailContent.images && project.detailContent.images.length > 0) {
         const mainImagePath = project.detailContent.images[0];
         htmlContent += `
@@ -103,28 +109,15 @@ function renderProjectDetails(project) {
                 <img src="${mainImagePath}" alt="${project.title} Main Image" class="main-project-img" onerror="this.style.display='none'">
             </div>
         `;
-    }
-
-    // 3. PDF和GitHub图标链接
-    htmlContent += renderProjectResources(project);
-
-    // 4. 异步加载Markdown文件内容（摘要和方法）
+    }    // 4. PDF和GitHub图标链接
+    htmlContent += renderProjectResources(project);    // 5. 异步加载Markdown文件内容（摘要和方法）
     if (project.detailContent.textFile) {
-        htmlContent += '<div id="project-text-content" class="project-text-content"></div>';
-        
-        loadTextFile(project.detailContent.textFile).then(textContent => {
-            if (textContent) {
-                const textContainer = document.getElementById('project-text-content');
-                if (textContainer) {
-                    const cleanedContent = removeInlineIcons(textContent);
-                    textContainer.innerHTML = markdownToHtml(cleanedContent);
-                    console.log('项目文本内容已从Markdown文件加载');
-                }
-            }
-        });
+        htmlContent += '<div id="project-text-content" class="project-text-content"><p>正在加载项目详细描述...</p></div>';
+    } else {
+        htmlContent += '<div id="project-text-content" class="project-text-content"><p>暂无项目描述</p></div>';
     }
 
-    // 5. 方法框架图
+    // 6. 方法框架图
     htmlContent += `
         <div class="methodology-framework">
             <h3>Methodology Framework</h3>
@@ -134,7 +127,7 @@ function renderProjectDetails(project) {
         </div>
     `;
 
-    // 6. 示例视频（只显示第一个视频）
+    // 7. 示例视频（只显示第一个视频）
     if (project.detailContent.videos && project.detailContent.videos.length > 0) {
         const firstVideo = project.detailContent.videos[0];
         htmlContent += `
@@ -150,10 +143,31 @@ function renderProjectDetails(project) {
         `;
     }
 
-    // 7. 返回主页按键
+    // 8. 返回主页按键
     htmlContent += `<a href="../../index.html" class="back-link">← Back to Homepage</a>`;
     
+    // 设置基础HTML结构
     detailContainer.innerHTML = htmlContent;
+
+    // 9. 异步加载Markdown文件内容
+    if (project.detailContent.textFile) {
+        loadTextFile(project.detailContent.textFile).then(textContent => {
+            if (textContent) {
+                const textContainer = document.getElementById('project-text-content');
+                if (textContainer) {
+                    const cleanedContent = removeInlineIcons(textContent);
+                    textContainer.innerHTML = markdownToHtml(cleanedContent);
+                    console.log('项目文本内容已从Markdown文件加载');
+                }
+            } else {
+                const textContainer = document.getElementById('project-text-content');
+                if (textContainer) {
+                    textContainer.innerHTML = '<p>无法加载项目描述内容</p>';
+                }
+            }
+        });
+    }
+    
     console.log('项目详情页渲染完成');
 }
 
