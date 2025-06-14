@@ -45,7 +45,7 @@ body {
  */
 
 /* 头部背景图片容器 */
-.header-background {
+#main-header {
     position: relative;
     height: 300px;
     background-image: url('../assets/images/background.svg');
@@ -58,7 +58,7 @@ body {
 }
 
 /* 头部背景遮罩 */
-.header-background::before {
+#main-header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -105,7 +105,7 @@ main {
 }
 
 /* 头像图片 */
-.avatar {
+#avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -113,7 +113,7 @@ main {
 }
 
 /* 用户名样式 */
-.user-name {
+#user-name {
     font-size: 2.2em;
     font-weight: 300;
     margin-bottom: 10px;
@@ -121,7 +121,7 @@ main {
 }
 
 /* 用户简介样式 */
-.user-bio {
+#user-bio {
     font-size: 1.1em;
     color: #666;
     line-height: 1.7;

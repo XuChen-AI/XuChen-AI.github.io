@@ -211,12 +211,15 @@ function updatePersonalInfo() {
             this.src = generatePlaceholderImage('头像', 150, 150);
         };
     }
-    
-    // 更新头部背景图片
+      // 更新头部背景图片
     const headerElement = document.getElementById('main-header');
     if (headerElement && personalInfo.headerBackgroundImageUrl) {
         headerElement.style.backgroundImage = `url('${personalInfo.headerBackgroundImageUrl}')`;
         console.log('背景图片已更新');
+    } else if (headerElement) {
+        // 如果配置中没有背景图片，使用默认的
+        headerElement.style.backgroundImage = `url('assets/images/background.svg')`;
+        console.log('使用默认背景图片');
     }
     
     // 更新页面标题
