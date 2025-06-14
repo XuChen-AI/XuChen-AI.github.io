@@ -92,35 +92,23 @@ function renderProjectDetails(project) {
     // 更新页面标题
     document.title = project.title + " - Project Details";
     
-    let htmlContent = `<h1>${project.title}</h1>`;
+    // 1. 项目名称
+    let htmlContent = `<h1 class="project-title">${project.title}</h1>`;
     
-    // 添加项目背景图片
-    const projectBgPath = `images/${PROJECT_ID}-bg.svg`;
-    htmlContent += `
-        <div class="project-background-image">
-            <img src="${projectBgPath}" alt="${project.title} Background Image" class="project-bg-img" onerror="this.style.display='none'">
-        </div>
-    `;
-
-    // 添加项目标签
-    if (project.detailContent.tags && project.detailContent.tags.length > 0) {
-        htmlContent += '<div class="project-tags">';
-        project.detailContent.tags.forEach(tag => {
-            htmlContent += `<span class="tag">${tag}</span>`;
-        });
-        htmlContent += '</div>';
-    }
-
-    // 添加项目图片
+    // 2. 项目主图片（使用第一张图片作为主图片）
     if (project.detailContent.images && project.detailContent.images.length > 0) {
-        htmlContent += '<div class="project-images">';
-        project.detailContent.images.forEach(imgPath => {
-            htmlContent += `<img src="${imgPath}" alt="${project.title}详情图片" onerror="this.style.display='none'">`;
-        });
-        htmlContent += '</div>';
+        const mainImagePath = project.detailContent.images[0];
+        htmlContent += `
+            <div class="project-main-image">
+                <img src="${mainImagePath}" alt="${project.title} Main Image" class="main-project-img" onerror="this.style.display='none'">
+            </div>
+        `;
     }
 
-    // 异步加载文本内容
+    // 3. PDF和GitHub图标链接
+    htmlContent += renderProjectResources(project);
+
+    // 4. 异步加载Markdown文件内容（摘要和方法）
     if (project.detailContent.textFile) {
         htmlContent += '<div id="project-text-content" class="project-text-content"></div>';
         
@@ -128,7 +116,6 @@ function renderProjectDetails(project) {
             if (textContent) {
                 const textContainer = document.getElementById('project-text-content');
                 if (textContainer) {
-                    // 移除文本中的内联图标HTML（我们将在页面中直接显示）
                     const cleanedContent = removeInlineIcons(textContent);
                     textContainer.innerHTML = markdownToHtml(cleanedContent);
                     console.log('项目文本内容已从Markdown文件加载');
@@ -137,38 +124,34 @@ function renderProjectDetails(project) {
         });
     }
 
-    // 添加本地视频
+    // 5. 方法框架图
+    htmlContent += `
+        <div class="methodology-framework">
+            <h3>Methodology Framework</h3>
+            <div class="framework-image">
+                <img src="images/methodology-framework.svg" alt="Methodology Framework" class="framework-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+    `;
+
+    // 6. 示例视频（只显示第一个视频）
     if (project.detailContent.videos && project.detailContent.videos.length > 0) {
-        htmlContent += '<div class="project-videos"><h3>Project Demo Videos</h3>';
-        project.detailContent.videos.forEach((videoPath, index) => {
-            htmlContent += `
+        const firstVideo = project.detailContent.videos[0];
+        htmlContent += `
+            <div class="project-demo-video">
+                <h3>Demo Video</h3>
                 <div class="video-container">
                     <video controls width="100%" style="max-width: 800px;">
-                        <source src="${videoPath}" type="video/mp4">
+                        <source src="${firstVideo}" type="video/mp4">
                         Your browser does not support video playback.
                     </video>
-                    <p class="video-caption">Video ${index + 1}: ${videoPath.split('/').pop()}</p>
                 </div>
-            `;
-        });
-        htmlContent += '</div>';
-    }
-
-    // 添加项目资源图标（直接在网页中显示，不在MD文件中）
-    htmlContent += renderProjectResources(project);
-
-    // 添加YouTube视频
-    if (project.detailContent.videoUrl) {
-        htmlContent += `
-            <div class="project-video-container">
-                <h3>Online Demo Video</h3>
-                <iframe src="${project.detailContent.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
     }
 
-    // 添加返回主页链接
-    htmlContent += `<a href="../../index.html" class="back-link">Back to Homepage</a>`;
+    // 7. 返回主页按键
+    htmlContent += `<a href="../../index.html" class="back-link">← Back to Homepage</a>`;
     
     detailContainer.innerHTML = htmlContent;
     console.log('项目详情页渲染完成');
@@ -176,7 +159,6 @@ function renderProjectDetails(project) {
 
 function renderProjectResources(project) {
     let resourcesHTML = '<div class="project-resources">';
-    resourcesHTML += '<h3>Project Resources</h3>';
     resourcesHTML += '<div class="resource-icons">';
 
     // PDF图标 - 链接到项目的pdfs文件夹
@@ -200,18 +182,6 @@ function renderProjectResources(project) {
             </div>
         `;
     }
-
-    // 方法论框架图
-    resourcesHTML += `
-        <div class="resource-item">
-            <a href="images/methodology-framework.svg" target="_blank" class="resource-link" title="View Methodology Framework">
-                <svg viewBox="0 0 24 24" class="resource-icon methodology-icon" fill="currentColor">
-                    <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM5 19V5H19V19H5ZM17 12H15V17H17V12ZM13 7H11V17H13V7ZM9 10H7V17H9V10Z"/>
-                </svg>
-                <span>Methodology</span>
-            </a>
-        </div>
-    `;
 
     resourcesHTML += '</div>';
     resourcesHTML += '</div>';
