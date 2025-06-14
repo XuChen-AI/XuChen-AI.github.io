@@ -15,11 +15,10 @@
             "thumbnailUrl": "projects/project1/images/project1-thumb.svg",
             "title": "AI-Assisted Medical Diagnosis System",
             "shortDescription": "Advanced deep learning system for early disease detection with 95%+ accuracy.",
-            "detailPageUrl": "projects/project1.html",
-            "detailContent": {
+            "detailPageUrl": "projects/project1.html",            "detailContent": {
                 "images": [
-                    "projects/project1/images/demo1.jpg",
-                    "projects/project1/images/architecture.jpg"
+                    "projects/project1/images/demo1.svg",
+                    "projects/project1/images/architecture.svg"
                 ],
                 "videos": [
                     "projects/project1/videos/demo_video.mp4",
@@ -38,10 +37,9 @@
             "title": "Personalized Learning Recommendation Engine",
             "shortDescription": "Intelligent learning resource recommendation system based on student behavior analysis.",
             "detailPageUrl": "projects/project2.html",
-            "detailContent": {
-                "images": [
-                    "projects/project2/images/system-overview.jpg",
-                    "projects/project2/images/results.jpg"
+            "detailContent": {                "images": [
+                    "projects/project2/images/system-overview.svg",
+                    "projects/project2/images/results.svg"
                 ],
                 "videos": [
                     "projects/project2/videos/system_demo.mp4",
@@ -60,10 +58,9 @@
             "title": "Autonomous Driving Perception Algorithms",
             "shortDescription": "Advanced perception algorithms for autonomous vehicles with high-precision environmental understanding.",
             "detailPageUrl": "projects/project3.html",
-            "detailContent": {
-                "images": [
-                    "projects/project3/images/perception-pipeline.jpg",
-                    "projects/project3/images/detection-results.jpg"
+            "detailContent": {                "images": [
+                    "projects/project3/images/perception-pipeline.svg",
+                    "projects/project3/images/detection-results.svg"
                 ],
                 "videos": [
                     "projects/project3/videos/driving_demo.mp4",

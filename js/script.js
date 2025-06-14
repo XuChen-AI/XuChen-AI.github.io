@@ -428,25 +428,32 @@ function renderProjectDetails(project) {
         htmlContent += '</div>';
         console.log('项目图片已添加:', project.detailContent.images.length, '张');
     }
-    
-    // 异步加载并显示文本文件内容
+      // 异步加载并显示文本文件内容（主要内容源）
     if (project.detailContent.textFile) {
+        // 首先添加容器
+        htmlContent += '<div id="project-text-content" class="project-text-content"></div>';
+        
+        // 异步加载Markdown内容
         loadTextFile(`../${project.detailContent.textFile}`).then(textContent => {
             if (textContent) {
                 const textContainer = document.getElementById('project-text-content');
                 if (textContainer) {
                     textContainer.innerHTML = markdownToHtml(textContent);
-                    console.log('项目文本内容已加载');
+                    console.log('项目文本内容已从Markdown文件加载');
+                }
+            } else {
+                // 如果Markdown文件加载失败，显示fallback内容
+                const textContainer = document.getElementById('project-text-content');
+                if (textContainer && project.detailContent.fullDescription) {
+                    textContainer.innerHTML = `<div class="project-description">${project.detailContent.fullDescription}</div>`;
+                    console.log('使用配置文件中的备用描述');
                 }
             }
         });
-        htmlContent += '<div id="project-text-content" class="project-text-content"></div>';
-    }
-    
-    // 添加原有的文字描述（作为备用内容）
-    if (project.detailContent.fullDescription) {
+    } else if (project.detailContent.fullDescription) {
+        // 如果没有textFile，则使用fullDescription作为备用
         htmlContent += `<div class="project-description">${project.detailContent.fullDescription}</div>`;
-        console.log('项目描述已添加');
+        console.log('项目描述已添加（来自配置文件）');
     }
       // 添加本地视频文件
     if (project.detailContent.videos && project.detailContent.videos.length > 0) {

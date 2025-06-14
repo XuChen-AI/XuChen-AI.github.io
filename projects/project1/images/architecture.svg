@@ -1,0 +1,50 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="medicalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="2" fill="#ffffff" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#medicalGrad)"/>
+  <rect width="600" height="400" fill="url(#dotPattern)"/>
+  
+  <!-- Medical Cross -->
+  <g transform="translate(100, 100)">
+    <rect x="40" y="15" width="12" height="50" fill="#ffffff" opacity="0.9"/>
+    <rect x="25" y="30" width="42" height="12" fill="#ffffff" opacity="0.9"/>
+  </g>
+  
+  <!-- Brain Network -->
+  <g transform="translate(300, 120)" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8">
+    <circle cx="30" cy="30" r="20"/>
+    <circle cx="70" cy="20" r="15"/>
+    <circle cx="80" cy="60" r="12"/>
+    <circle cx="40" cy="70" r="10"/>
+    <line x1="50" y1="35" x2="55" y2="25"/>
+    <line x1="45" y1="50" x2="70" y2="55"/>
+    <line x1="55" y1="40" x2="75" y2="45"/>
+  </g>
+  
+  <!-- Data Visualization -->
+  <g transform="translate(450, 150)" opacity="0.7">
+    <rect x="0" y="40" width="8" height="20" fill="#ffffff"/>
+    <rect x="12" y="30" width="8" height="30" fill="#ffffff"/>
+    <rect x="24" y="15" width="8" height="45" fill="#ffffff"/>
+    <rect x="36" y="25" width="8" height="35" fill="#ffffff"/>
+    <rect x="48" y="10" width="8" height="50" fill="#ffffff"/>
+  </g>
+  
+  <!-- Title -->
+  <rect x="0" y="320" width="600" height="80" fill="rgba(0,0,0,0.5)"/>
+  <text x="30" y="350" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">
+    AI Medical Diagnosis - System Architecture
+  </text>
+  <text x="30" y="375" font-family="Arial, sans-serif" font-size="14" fill="#e5e7eb">
+    Deep Learning Pipeline for Medical Image Analysis
+  </text>
+</svg>
