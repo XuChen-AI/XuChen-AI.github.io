@@ -810,3 +810,163 @@ footer a:hover {
         border-radius: 6px; /* 更小圆角 */
     }
 }
+
+/* ==========================================
+ * 项目资源图标样式
+ * ==========================================
+ */
+
+/* 项目资源容器 */
+.project-resources {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-resources h3 {
+    margin: 0 0 20px 0;
+    color: #495057;
+    font-size: 1.3em;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* 资源图标网格 */
+.resource-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* 单个资源项 */
+.resource-item {
+    text-align: center;
+}
+
+/* 资源链接样式 */
+.resource-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #495057;
+    padding: 15px;
+    border-radius: 10px;
+    background: white;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    min-height: 80px;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.resource-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.resource-link:hover .resource-icon {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* 禁用状态的资源链接 */
+.resource-link.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.resource-link.disabled:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-color: #e9ecef;
+    color: #6c757d;
+}
+
+/* 资源图标样式 */
+.resource-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    color: #495057;
+}
+
+/* 方法论图标特殊样式 */
+.methodology-icon {
+    fill: #28a745;
+}
+
+/* 灰度化效果（用于禁用状态） */
+.resource-icon.grayscale {
+    filter: grayscale(100%);
+}
+
+/* 资源链接文字 */
+.resource-link span {
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* 移动端资源图标调整 */
+@media (max-width: 768px) {
+    .resource-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .project-resources {
+        margin: 20px 0;
+        padding: 20px;
+    }
+    
+    .resource-link {
+        padding: 12px;
+        min-height: 70px;
+    }
+    
+    .resource-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .resource-link span {
+        font-size: 0.85em;
+    }
+}
+
+/* 小屏幕设备资源图标调整 */
+@media (max-width: 480px) {
+    .resource-icons {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .project-resources {
+        margin: 15px 0;
+        padding: 15px;
+    }
+    
+    .resource-link {
+        padding: 10px;
+        min-height: 60px;
+    }
+    
+    .resource-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .resource-link span {
+        font-size: 0.8em;
+    }
+}

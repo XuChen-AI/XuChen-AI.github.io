@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="processGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dropShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e293b">
+    AI-Assisted Medical Diagnosis System - Methodology Framework
+  </text>
+  
+  <!-- Data Input Layer -->
+  <rect x="50" y="80" width="150" height="60" rx="10" fill="url(#nodeGradient)" filter="url(#dropShadow)"/>
+  <text x="125" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Medical Images</text>
+  <text x="125" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">CT, MRI, X-ray</text>
+  <text x="125" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Pathology</text>
+  
+  <!-- Preprocessing -->
+  <rect x="250" y="80" width="150" height="60" rx="10" fill="url(#processGradient)" filter="url(#dropShadow)"/>
+  <text x="325" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Preprocessing</text>
+  <text x="325" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Normalization</text>
+  <text x="325" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Augmentation</text>
+  
+  <!-- Feature Extraction -->
+  <rect x="450" y="80" width="150" height="60" rx="10" fill="url(#nodeGradient)" filter="url(#dropShadow)"/>
+  <text x="525" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Feature Extraction</text>
+  <text x="525" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">CNN Layers</text>
+  <text x="525" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Attention Mechanism</text>
+  
+  <!-- Classification -->
+  <rect x="650" y="80" width="120" height="60" rx="10" fill="url(#processGradient)" filter="url(#dropShadow)"/>
+  <text x="710" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Classification</text>
+  <text x="710" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Multi-class</text>
+  <text x="710" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Prediction</text>
+  
+  <!-- Deep Learning Components -->
+  <rect x="150" y="200" width="500" height="120" rx="15" fill="#e2e8f0" stroke="#64748b" stroke-width="2" filter="url(#dropShadow)"/>
+  <text x="400" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">
+    Deep Learning Architecture
+  </text>
+  
+  <!-- CNN Block -->
+  <rect x="180" y="240" width="120" height="60" rx="8" fill="url(#nodeGradient)" filter="url(#dropShadow)"/>
+  <text x="240" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">CNN Backbone</text>
+  <text x="240" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">ResNet-50</text>
+  <text x="240" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">VGG-16</text>
+  
+  <!-- RNN Block -->
+  <rect x="340" y="240" width="120" height="60" rx="8" fill="url(#nodeGradient)" filter="url(#dropShadow)"/>
+  <text x="400" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">RNN Module</text>
+  <text x="400" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">LSTM</text>
+  <text x="400" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">GRU</text>
+  
+  <!-- Transfer Learning -->
+  <rect x="500" y="240" width="120" height="60" rx="8" fill="url(#processGradient)" filter="url(#dropShadow)"/>
+  <text x="560" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Transfer Learning</text>
+  <text x="560" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">ImageNet</text>
+  <text x="560" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Fine-tuning</text>
+  
+  <!-- Validation & Evaluation -->
+  <rect x="200" y="370" width="400" height="80" rx="15" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#dropShadow)"/>
+  <text x="400" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#92400e">
+    Validation & Evaluation
+  </text>
+  <text x="280" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">5-Fold Cross Validation</text>
+  <text x="520" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">Clinical Trial</text>
+  <text x="400" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#92400e">Accuracy: 95%+ | Sensitivity: 98% | Specificity: 94%</text>
+  
+  <!-- Output -->
+  <rect x="300" y="500" width="200" height="60" rx="10" fill="url(#processGradient)" filter="url(#dropShadow)"/>
+  <text x="400" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Diagnostic Result</text>
+  <text x="400" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Confidence Score</text>
+  <text x="400" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Clinical Recommendations</text>
+  
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  
+  <!-- Horizontal arrows -->
+  <line x1="200" y1="110" x2="245" y2="110" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="110" x2="445" y2="110" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="600" y1="110" x2="645" y2="110" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Vertical arrows -->
+  <line x1="400" y1="150" x2="400" y2="190" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="330" x2="400" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="460" x2="400" y2="490" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+</svg>

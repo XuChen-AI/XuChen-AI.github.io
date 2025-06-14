@@ -472,6 +472,58 @@ function renderProjectDetails(project) {
         htmlContent += '</div>';
         console.log('本地视频已添加:', project.detailContent.videos.length, '个');
     }
+      // 添加PDF和GitHub图标链接
+    htmlContent += '<div class="project-resources">';
+    htmlContent += '<h3>Project Resources</h3>';
+    htmlContent += '<div class="resource-icons">';
+    
+    // PDF图标 - 链接到项目的pdfs文件夹
+    htmlContent += `
+        <div class="resource-item">
+            <a href="../projects/${project.id}/pdfs/" target="_blank" class="resource-link" title="View Project PDFs">
+                <img src="../assets/icons/pdf-icon.svg" alt="PDF" class="resource-icon">
+                <span>Research Papers</span>
+            </a>
+        </div>
+    `;
+    
+    // GitHub图标 - 如果有GitHub链接
+    if (project.detailContent.githubUrl) {
+        htmlContent += `
+            <div class="resource-item">
+                <a href="${project.detailContent.githubUrl}" target="_blank" class="resource-link" title="View Source Code">
+                    <img src="../assets/icons/github-icon.svg" alt="GitHub" class="resource-icon">
+                    <span>Source Code</span>
+                </a>
+            </div>
+        `;
+    } else {
+        // 如果没有GitHub链接，默认链接到一个通用的GitHub页面或显示placeholder
+        htmlContent += `
+            <div class="resource-item">
+                <a href="#" class="resource-link disabled" title="Source code coming soon">
+                    <img src="../assets/icons/github-icon.svg" alt="GitHub" class="resource-icon grayscale">
+                    <span>Source Code</span>
+                </a>
+            </div>
+        `;
+    }
+    
+    // 方法论框架图
+    htmlContent += `
+        <div class="resource-item">
+            <a href="../projects/${project.id}/images/methodology-framework.svg" target="_blank" class="resource-link" title="View Methodology Framework">
+                <svg viewBox="0 0 24 24" class="resource-icon methodology-icon" fill="currentColor">
+                    <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM5 19V5H19V19H5ZM17 12H15V17H17V12ZM13 7H11V17H13V7ZM9 10H7V17H9V10Z"/>
+                </svg>
+                <span>Methodology</span>
+            </a>
+        </div>
+    `;
+    
+    htmlContent += '</div>';
+    htmlContent += '</div>';
+    console.log('项目资源图标已添加');
     
     // 添加外部链接按钮
     if (project.detailContent.githubUrl || project.detailContent.paperUrl) {
