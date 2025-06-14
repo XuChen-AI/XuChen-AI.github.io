@@ -15,7 +15,7 @@
             "thumbnailUrl": "projects/project1/images/project1-thumb.svg",
             "title": "AI-Assisted Medical Diagnosis System",
             "shortDescription": "Advanced deep learning system for early disease detection with 95%+ accuracy.",
-            "detailPageUrl": "projects/project1.html",            "detailContent": {
+            "detailPageUrl": "projects/project1/index.html",            "detailContent": {
                 "images": [
                     "projects/project1/images/demo1.svg",
                     "projects/project1/images/architecture.svg"
@@ -36,7 +36,7 @@
             "thumbnailUrl": "projects/project2/images/project2-thumb.svg",
             "title": "Personalized Learning Recommendation Engine",
             "shortDescription": "Intelligent learning resource recommendation system based on student behavior analysis.",
-            "detailPageUrl": "projects/project2.html",
+            "detailPageUrl": "projects/project2/index.html",
             "detailContent": {                "images": [
                     "projects/project2/images/system-overview.svg",
                     "projects/project2/images/results.svg"
@@ -57,7 +57,7 @@
             "thumbnailUrl": "projects/project3/images/project3-thumb.svg",
             "title": "Autonomous Driving Perception Algorithms",
             "shortDescription": "Advanced perception algorithms for autonomous vehicles with high-precision environmental understanding.",
-            "detailPageUrl": "projects/project3.html",
+            "detailPageUrl": "projects/project3/index.html",
             "detailContent": {                "images": [
                     "projects/project3/images/perception-pipeline.svg",
                     "projects/project3/images/detection-results.svg"

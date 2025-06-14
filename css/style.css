@@ -970,3 +970,93 @@ footer a:hover {
         font-size: 0.8em;
     }
 }
+
+/* ==========================================
+ * Markdown内联图标样式
+ * ==========================================
+ */
+
+/* Markdown文档中的图标容器 */
+.project-icons {
+    text-align: center !important;
+    margin: 20px 0 !important;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+/* Markdown文档中的图标链接 */
+.project-icons a {
+    display: inline-flex !important;
+    align-items: center;
+    text-decoration: none !important;
+    margin: 0 15px !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-icons a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+    border-color: #007bff;
+}
+
+/* Markdown文档中的图标图片 */
+.project-icons img {
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: 8px !important;
+    vertical-align: middle !important;
+}
+
+/* Markdown文档中的图标文字 */
+.project-icons span {
+    color: #495057 !important;
+    font-weight: 500 !important;
+    font-size: 0.9em !important;
+}
+
+.project-icons a:hover span {
+    color: #007bff !important;
+}
+
+/* 移动端图标调整 */
+@media (max-width: 768px) {
+    .project-icons {
+        margin: 15px 0 !important;
+        padding: 12px;
+    }
+    
+    .project-icons a {
+        margin: 5px 8px !important;
+        padding: 6px 10px;
+    }
+    
+    .project-icons img {
+        width: 24px !important;
+        height: 24px !important;
+        margin-right: 6px !important;
+    }
+    
+    .project-icons span {
+        font-size: 0.85em !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-icons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px;
+    }
+    
+    .project-icons a {
+        margin: 0 !important;
+        justify-content: center;
+    }
+}

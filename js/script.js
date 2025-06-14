@@ -4,28 +4,27 @@
  * ==========================================
  * 
  * 作者：[您的姓名]
- * 版本：2.0
+ * 版本：3.0
  * 创建日期：[创建日期]
- * 最后修改：[修改日期]
+ * 最后修改：2025年6月14日
  * 
  * 功能描述：
  * 这是个人学术主页的核心JavaScript文件，负责：
  * 1. 动态加载配置文件和个人信息
- * 2. 渲染项目列表和项目详情页
- * 3. 处理图片、视频和文本文件的加载
+ * 2. 渲染项目列表卡片
+ * 3. 处理主页图片和文本显示
  * 4. 提供响应式交互功能
- * 5. 支持Markdown文本转HTML显示
+ * 
+ * 注意：项目详情页功能已移动到各个项目文件夹的独立JS文件中
  * 
  * 文件结构：
  * - 配置管理：加载和处理配置文件
  * - 页面初始化：设置个人信息和项目数据
- * - 项目展示：动态生成项目卡片和详情页
- * - 文件处理：文本文件加载和Markdown转换
+ * - 项目展示：动态生成项目卡片（仅主页）
  * - 工具函数：辅助功能和响应式处理
  * 
  * 依赖项：
  * - config/config.json：配置文件
- * - 各项目文件夹中的资源文件
  * - 现代浏览器的 Fetch API 支持
  * 
  * 浏览器兼容性：
@@ -169,11 +168,6 @@ function initializePage() {
     updatePersonalInfo();
     loadProjects();
     updateFooter();
-    
-    // 检查是否在项目详情页面
-    if (window.location.pathname.includes('/projects/')) {
-        loadProjectDetails();
-    }
     
     console.log('页面初始化完成');
 }
@@ -354,292 +348,9 @@ function updateFooter() {
 }
 
 /* ==========================================
- * 项目详情页功能
+ * 工具函数
  * ==========================================
  */
-
-/**
- * 项目详情页加载逻辑
- * 解析URL中的项目ID并加载对应的项目详情
- */
-function loadProjectDetails() {
-    console.log('开始加载项目详情页...');
-    
-    // 从 URL 获取项目 ID
-    const pathParts = window.location.pathname.split('/');
-    const projectIdWithExtension = pathParts[pathParts.length - 1];
-    
-    // 移除文件扩展名获取纯ID
-    const projectId = projectIdWithExtension.substring(0, projectIdWithExtension.lastIndexOf('.'));
-    console.log('当前项目ID:', projectId);
-    
-    // 查找对应的项目数据
-    const currentProject = config && config.projects ? 
-        config.projects.find(project => project.id === projectId) : null;
-    
-    if (currentProject && currentProject.detailContent) {
-        console.log('找到项目数据，开始渲染详情页');
-        renderProjectDetails(currentProject);
-    } else {
-        console.warn('未找到项目数据，显示404页面');
-        renderProjectNotFound();
-    }
-}
-
-/**
- * 渲染项目详情页内容
- * @param {Object} project - 项目数据对象
- */
-function renderProjectDetails(project) {
-    const detailContainer = document.getElementById('project-detail-content');
-    if (!detailContainer) {
-        console.error('未找到项目详情容器元素');
-        return;
-    }
-    
-    console.log('开始渲染项目详情:', project.title);
-      // 更新页面标题
-    document.title = project.title + " - Project Details";
-      let htmlContent = `<h1>${project.title}</h1>`;    // 添加项目背景图片
-    const projectBgPath = `../projects/${project.id}/images/${project.id}-bg.svg`;
-    htmlContent += `
-        <div class="project-background-image">
-            <img src="${projectBgPath}" alt="${project.title} Background Image" class="project-bg-img" onerror="this.style.display='none'">
-        </div>
-    `;
-    console.log('项目背景图片已添加:', projectBgPath);
-    
-    // 添加项目标签（如果存在）
-    if (project.detailContent.tags && project.detailContent.tags.length > 0) {
-        htmlContent += '<div class="project-tags">';
-        project.detailContent.tags.forEach(tag => {
-            htmlContent += `<span class="tag">${tag}</span>`;
-        });
-        htmlContent += '</div>';
-        console.log('项目标签已添加:', project.detailContent.tags.length, '个');
-    }
-    
-    // 添加项目图片
-    if (project.detailContent.images && project.detailContent.images.length > 0) {
-        htmlContent += '<div class="project-images">';
-        project.detailContent.images.forEach(imgPath => {
-            htmlContent += `<img src="../${imgPath}" alt="${project.title}详情图片" onerror="this.style.display='none'">`;
-        });
-        htmlContent += '</div>';
-        console.log('项目图片已添加:', project.detailContent.images.length, '张');
-    }
-      // 异步加载并显示文本文件内容（主要内容源）
-    if (project.detailContent.textFile) {
-        // 首先添加容器
-        htmlContent += '<div id="project-text-content" class="project-text-content"></div>';
-        
-        // 异步加载Markdown内容
-        loadTextFile(`../${project.detailContent.textFile}`).then(textContent => {
-            if (textContent) {
-                const textContainer = document.getElementById('project-text-content');
-                if (textContainer) {
-                    textContainer.innerHTML = markdownToHtml(textContent);
-                    console.log('项目文本内容已从Markdown文件加载');
-                }
-            } else {
-                // 如果Markdown文件加载失败，显示fallback内容
-                const textContainer = document.getElementById('project-text-content');
-                if (textContainer && project.detailContent.fullDescription) {
-                    textContainer.innerHTML = `<div class="project-description">${project.detailContent.fullDescription}</div>`;
-                    console.log('使用配置文件中的备用描述');
-                }
-            }
-        });
-    } else if (project.detailContent.fullDescription) {
-        // 如果没有textFile，则使用fullDescription作为备用
-        htmlContent += `<div class="project-description">${project.detailContent.fullDescription}</div>`;
-        console.log('项目描述已添加（来自配置文件）');
-    }
-      // 添加本地视频文件
-    if (project.detailContent.videos && project.detailContent.videos.length > 0) {
-        htmlContent += '<div class="project-videos"><h3>Project Demo Videos</h3>';
-        project.detailContent.videos.forEach((videoPath, index) => {
-            htmlContent += `
-                <div class="video-container">
-                    <video controls width="100%" style="max-width: 800px;">
-                        <source src="../${videoPath}" type="video/mp4">
-                        Your browser does not support video playback.
-                    </video>
-                    <p class="video-caption">Video ${index + 1}: ${videoPath.split('/').pop()}</p>
-                </div>
-            `;
-        });
-        htmlContent += '</div>';
-        console.log('本地视频已添加:', project.detailContent.videos.length, '个');
-    }
-      // 添加PDF和GitHub图标链接
-    htmlContent += '<div class="project-resources">';
-    htmlContent += '<h3>Project Resources</h3>';
-    htmlContent += '<div class="resource-icons">';
-    
-    // PDF图标 - 链接到项目的pdfs文件夹
-    htmlContent += `
-        <div class="resource-item">
-            <a href="../projects/${project.id}/pdfs/" target="_blank" class="resource-link" title="View Project PDFs">
-                <img src="../assets/icons/pdf-icon.svg" alt="PDF" class="resource-icon">
-                <span>Research Papers</span>
-            </a>
-        </div>
-    `;
-    
-    // GitHub图标 - 如果有GitHub链接
-    if (project.detailContent.githubUrl) {
-        htmlContent += `
-            <div class="resource-item">
-                <a href="${project.detailContent.githubUrl}" target="_blank" class="resource-link" title="View Source Code">
-                    <img src="../assets/icons/github-icon.svg" alt="GitHub" class="resource-icon">
-                    <span>Source Code</span>
-                </a>
-            </div>
-        `;
-    } else {
-        // 如果没有GitHub链接，默认链接到一个通用的GitHub页面或显示placeholder
-        htmlContent += `
-            <div class="resource-item">
-                <a href="#" class="resource-link disabled" title="Source code coming soon">
-                    <img src="../assets/icons/github-icon.svg" alt="GitHub" class="resource-icon grayscale">
-                    <span>Source Code</span>
-                </a>
-            </div>
-        `;
-    }
-    
-    // 方法论框架图
-    htmlContent += `
-        <div class="resource-item">
-            <a href="../projects/${project.id}/images/methodology-framework.svg" target="_blank" class="resource-link" title="View Methodology Framework">
-                <svg viewBox="0 0 24 24" class="resource-icon methodology-icon" fill="currentColor">
-                    <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM5 19V5H19V19H5ZM17 12H15V17H17V12ZM13 7H11V17H13V7ZM9 10H7V17H9V10Z"/>
-                </svg>
-                <span>Methodology</span>
-            </a>
-        </div>
-    `;
-    
-    htmlContent += '</div>';
-    htmlContent += '</div>';
-    console.log('项目资源图标已添加');
-    
-    // 添加外部链接按钮
-    if (project.detailContent.githubUrl || project.detailContent.paperUrl) {
-        htmlContent += '<div class="project-links">';
-          if (project.detailContent.githubUrl) {
-            htmlContent += `<a href="${project.detailContent.githubUrl}" target="_blank" class="project-link-btn github-btn">View Code</a>`;
-        }
-        
-        if (project.detailContent.paperUrl) {
-            htmlContent += `<a href="${project.detailContent.paperUrl}" target="_blank" class="project-link-btn paper-btn">View Paper</a>`;
-        }
-          htmlContent += '</div>';
-        console.log('外部链接已添加');
-    }
-    
-    // 添加 YouTube 视频嵌入
-    if (project.detailContent.videoUrl) {
-        htmlContent += `
-            <div class="project-video-container">
-                <h3>Online Demo Video</h3>
-                <iframe src="${project.detailContent.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        `;
-        console.log('YouTube视频已添加');
-    }
-    
-    // 添加返回主页的链接
-    htmlContent += `<a href="../index.html" class="back-link">Back to Homepage</a>`;
-    
-    // 将生成的HTML内容插入到页面中
-    detailContainer.innerHTML = htmlContent;
-    console.log('项目详情页渲染完成');
-}
-
-/**
- * 渲染项目未找到页面
- * 当项目ID无效或项目数据缺失时显示
- */
-function renderProjectNotFound() {
-    const detailContainer = document.getElementById('project-detail-content');
-    if (!detailContainer) {
-        console.error('未找到项目详情容器元素');
-        return;
-    }
-    
-    console.log('渲染项目未找到页面');
-      detailContainer.innerHTML = `
-        <h1>Project Not Found</h1>
-        <p>Sorry, we couldn't find the project details you're looking for. Possible reasons:</p>
-        <ul>
-            <li>Project ID does not exist</li>
-            <li>Project data configuration error</li>
-            <li>Configuration file loading failed</li>
-        </ul>
-        <a href="../index.html" class="back-link">Back to Homepage</a>
-    `;
-    
-    // 更新页面标题
-    document.title = "Project Not Found - Error Page";
-}
-
-/* ==========================================
- * 文件处理功能
- * ==========================================
- */
-
-/**
- * 异步加载文本文件内容
- * @param {string} filePath - 文件路径
- * @returns {Promise<string|null>} 文件内容或null（如果加载失败）
- */
-async function loadTextFile(filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`HTTP错误! 状态: ${response.status}`);
-        }
-        const textContent = await response.text();
-        console.log('文本文件加载成功:', filePath);
-        return textContent;
-    } catch (error) {
-        console.warn(`文本文件加载失败: ${error.message}`);
-        return null;
-    }
-}
-
-/**
- * 将Markdown文本转换为HTML
- * 这是一个简化版的Markdown解析器，支持基本的Markdown语法
- * @param {string} markdown - Markdown格式的文本
- * @returns {string} 转换后的HTML文本
- */
-function markdownToHtml(markdown) {
-    if (!markdown) {
-        console.warn('Markdown内容为空');
-        return '';
-    }
-    
-    console.log('开始转换Markdown为HTML');
-    
-    return markdown
-        // 标题转换 (###, ##, #)
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        // 无序列表转换
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-        // 段落转换
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/^(?!<[h|u|l])(.*)$/gim, '<p>$1</p>')
-        // 清理多余的标签
-        .replace(/<p><\/p>/g, '')
-        .replace(/<p>(<[h|u])/g, '$1')
-        .replace(/(<\/[h|u][^>]*>)<\/p>/g, '$1');
-}
 
 /**
  * 生成占位图片的SVG数据URL
@@ -755,4 +466,4 @@ window.addEventListener('unhandledrejection', (event) => {
 });
 
 // 文件结束标记
-console.log('个人学术主页JavaScript文件加载完成 - Version 2.0');
+console.log('个人学术主页JavaScript文件加载完成 - Version 3.0');
