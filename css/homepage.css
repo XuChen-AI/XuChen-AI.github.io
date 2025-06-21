@@ -188,34 +188,49 @@ main {
     font-weight: 300;
 }
 
-/* 项目网格布局容器 */
+/* 项目网格布局容器 - 修改为行布局 */
 #projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* 单个项目卡片样式 */
+/* 单个项目卡片样式 - 修改为横向布局 */
 .project-card {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 120px;
 }
 
 /* 项目卡片悬停效果 */
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 项目缩略图样式 */
-.project-thumbnail {
+/* 项目卡片链接 */
+.project-card a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
     width: 100%;
-    height: 180px;
+}
+
+/* 项目缩略图样式 - 修改为固定尺寸 */
+.project-thumbnail {
+    width: 200px;
+    height: 120px;
     object-fit: cover;
+    flex-shrink: 0;
     transition: transform 0.3s ease;
 }
 
@@ -224,60 +239,32 @@ main {
     transform: scale(1.05);
 }
 
-/* 项目信息区域 */
+/* 项目信息区域 - 修改为右侧布局 */
 .project-info {
-    padding: 20px;
+    padding: 20px 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* 项目标题 */
-.project-title {
-    font-size: 1.3em;
+/* 项目标题 - 调整样式 */
+.project-info h3 {
+    font-size: 1.4em;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin: 0 0 8px 0;
     color: #333;
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
-/* 项目简介 */
-.project-description {
+/* 项目简介 - 调整样式 */
+.project-info p {
     font-size: 0.95em;
     color: #666;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    line-height: 1.5;
+    margin: 0;
 }
 
-/* 项目技术标签容器 */
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 15px;
-}
-
-/* 技术标签样式 */
-.tag {
-    background-color: #007bff;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    font-weight: 500;
-}
-
-/* 查看详情链接 */
-.view-details {
-    display: inline-block;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9em;
-    transition: color 0.3s ease;
-}
-
-.view-details:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
 
 /* ==========================================
  * 4. 页脚样式
@@ -362,19 +349,32 @@ footer a:hover {
     #projects-section h2 {
         font-size: 1.8em;
     }
-    
-    /* 项目网格移动端调整 */
+      /* 项目网格移动端调整 */
     #projects-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 20px;
     }
     
-    /* 项目卡片移动端调整 */
+    /* 项目卡片移动端调整 - 改为垂直布局 */
+    .project-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .project-card a {
+        flex-direction: column;
+    }
+    
+    .project-thumbnail {
+        width: 100%;
+        height: 160px;
+    }
+    
     .project-info {
         padding: 15px;
+        text-align: center;
     }
     
-    .project-title {
+    .project-info h3 {
         font-size: 1.2em;
     }
 }

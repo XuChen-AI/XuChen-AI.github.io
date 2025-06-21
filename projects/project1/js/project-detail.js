@@ -107,52 +107,63 @@ function renderProjectDetails(projectConfig) {
     if (!detailContainer) {
         console.error('未找到项目详情容器元素');
         return;
-    }
-
-    const project = projectConfig.projectInfo;
+    }    const project = projectConfig.projectInfo;
+    const content = projectConfig.content;
+    const links = projectConfig.links;
     console.log('开始渲染项目详情:', project.title);
     
     // 更新页面标题
     document.title = project.title + " - Project Details";
-      // 1. 项目名称
+    // 1. 项目名称
     let htmlContent = `<h1 class="project-title">${project.title}</h1>`;
     
     // 2. 项目背景图片（在标题后面显示）
-    htmlContent += `
-        <div class="project-background-image">
-            <img src="images/${PROJECT_ID}-bg.svg" alt="${project.title} Background" class="project-bg-img" onerror="this.style.display='none'">
-        </div>
-    `;
+    if (project.backgroundUrl) {
+        htmlContent += `
+            <div class="project-background-image">
+                <img src="${project.backgroundUrl}" alt="${project.title} Background" class="project-bg-img" onerror="this.style.display='none'">
+            </div>
+        `;
+    }
     
     // 3. 项目主图片（使用第一张图片作为主图片）
-    if (project.detailContent.images && project.detailContent.images.length > 0) {
-        const mainImagePath = project.detailContent.images[0];
+    if (content.images && content.images.length > 0) {
+        const mainImagePath = content.images[0];
         htmlContent += `
             <div class="project-main-image">
                 <img src="${mainImagePath}" alt="${project.title} Main Image" class="main-project-img" onerror="this.style.display='none'">
             </div>
         `;
-    }    // 4. PDF和GitHub图标链接
-    htmlContent += renderProjectResources(project);    // 5. 异步加载Markdown文件内容（摘要和方法）
-    if (project.detailContent.textFile) {
+    }
+    
+    // 4. PDF和GitHub图标链接
+    htmlContent += renderProjectResources(links);
+    
+    // 5. 项目描述内容
+    if (content.fullDescription) {
+        htmlContent += `<div id="project-text-content" class="project-text-content">${content.fullDescription}</div>`;
+    } else if (content.textFile) {
         htmlContent += '<div id="project-text-content" class="project-text-content"><p>正在加载项目详细描述...</p></div>';
     } else {
         htmlContent += '<div id="project-text-content" class="project-text-content"><p>暂无项目描述</p></div>';
     }
 
     // 6. 方法框架图
-    htmlContent += `
-        <div class="methodology-framework">
-            <h3>Methodology Framework</h3>
-            <div class="framework-image">
-                <img src="images/methodology-framework.svg" alt="Methodology Framework" class="framework-img" onerror="this.style.display='none'">
+    const frameworkImage = content.images.find(img => img.includes('methodology-framework'));
+    if (frameworkImage) {
+        htmlContent += `
+            <div class="methodology-framework">
+                <h3>Methodology Framework</h3>
+                <div class="framework-image">
+                    <img src="${frameworkImage}" alt="Methodology Framework" class="framework-img" onerror="this.style.display='none'">
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    }
 
     // 7. 示例视频（只显示第一个视频）
-    if (project.detailContent.videos && project.detailContent.videos.length > 0) {
-        const firstVideo = project.detailContent.videos[0];
+    if (content.videos && content.videos.length > 0) {
+        const firstVideo = content.videos[0];
         htmlContent += `
             <div class="project-demo-video">
                 <h3>Demo Video</h3>
@@ -164,58 +175,52 @@ function renderProjectDetails(projectConfig) {
                 </div>
             </div>
         `;
+    }    // 8. YouTube视频嵌入（如果有）
+    if (links.videoUrl) {
+        htmlContent += `
+            <div class="project-youtube-video">
+                <h3>Project Video</h3>
+                <div class="youtube-container">
+                    <iframe width="100%" height="400" src="${links.videoUrl}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        `;
     }
 
-    // 8. 返回主页按键
+    // 9. 返回主页按键
     htmlContent += `<a href="../../index.html" class="back-link">← Back to Homepage</a>`;
     
     // 设置基础HTML结构
-    detailContainer.innerHTML = htmlContent;    // 9. 异步加载Markdown文件内容
-    if (project.detailContent.textFile) {
-        loadTextFile(project.detailContent.textFile).then(textContent => {
-            const textContainer = document.getElementById('project-text-content');
-            if (textContainer) {
-                if (textContent) {
-                    const cleanedContent = removeInlineIcons(textContent);
-                    textContainer.innerHTML = markdownToHtml(cleanedContent);
-                    console.log('项目文本内容已从Markdown文件加载');
-                } else {
-                    // 如果无法加载文件，显示默认内容
-                    textContainer.innerHTML = markdownToHtml(getDefaultProjectDescription());
-                    console.log('使用默认项目描述内容');
-                }
-            }
-        }).catch(error => {
-            console.error('加载Markdown文件时出错:', error);
-            const textContainer = document.getElementById('project-text-content');
-            if (textContainer) {
-                textContainer.innerHTML = markdownToHtml(getDefaultProjectDescription());
-            }
-        });
-    }
+    detailContainer.innerHTML = htmlContent;
     
-    console.log('项目详情页渲染完成');
+    // 异步加载Markdown文件内容（如果有）
+    if (content.textFile) {
+        loadMarkdownContent(content.textFile);
+    }
+      console.log('项目详情页渲染完成');
 }
 
-function renderProjectResources(project) {
+function renderProjectResources(links) {
     let resourcesHTML = '<div class="project-resources">';
     resourcesHTML += '<div class="resource-icons">';
 
-    // PDF图标 - 链接到项目的pdfs文件夹
-    resourcesHTML += `
-        <div class="resource-item">
-            <a href="pdfs/" target="_blank" class="resource-link" title="View Project PDFs">
-                <img src="icons/pdf-icon.svg" alt="PDF" class="resource-icon">
-                <span>Research Papers</span>
-            </a>
-        </div>
-    `;
-
-    // GitHub图标
-    if (project.detailContent.githubUrl) {
+    // PDF图标 - 链接到项目的pdfs文件夹或论文链接
+    if (links.paperUrl) {
         resourcesHTML += `
             <div class="resource-item">
-                <a href="${project.detailContent.githubUrl}" target="_blank" class="resource-link" title="View Source Code">
+                <a href="${links.paperUrl}" target="_blank" class="resource-link" title="View Research Paper">
+                    <img src="icons/pdf-icon.svg" alt="PDF" class="resource-icon">
+                    <span>Research Paper</span>
+                </a>
+            </div>
+        `;
+    }
+
+    // GitHub图标
+    if (links.githubUrl) {
+        resourcesHTML += `
+            <div class="resource-item">
+                <a href="${links.githubUrl}" target="_blank" class="resource-link" title="View Source Code">
                     <img src="icons/github-icon.svg" alt="GitHub" class="resource-icon">
                     <span>Source Code</span>
                 </a>
@@ -238,7 +243,31 @@ function renderProjectNotFound() {
         <p>Sorry, we couldn't find the project details you're looking for.</p>
         <a href="../../index.html" class="back-link">Back to Homepage</a>
     `;
-    document.title = "Project Not Found";
+}
+
+async function loadMarkdownContent(textFile) {
+    try {
+        const response = await fetch(textFile);
+        if (response.ok) {
+            const markdownText = await response.text();
+            const textContentElement = document.getElementById('project-text-content');
+            if (textContentElement) {
+                // 简单的Markdown转HTML（基础功能）
+                const htmlContent = markdownText
+                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+                    .replace(/\*(.*)\*/gim, '<em>$1</em>')
+                    .replace(/\n\n/gim, '</p><p>')
+                    .replace(/^(.*)$/gim, '<p>$1</p>');
+                
+                textContentElement.innerHTML = htmlContent;
+            }
+        }
+    } catch (error) {
+        console.error('加载Markdown文件失败:', error);
+    }
 }
 
 /* ==========================================
