@@ -65,9 +65,8 @@ main {
     padding: 0 20px;
 }
 
-/* Profile section - simplified academic style with background */
+/* Profile section - simplified academic style */
 #profile {
-    background-color: #ffffff;
     padding: 40px 20px;
     margin: 0 auto 60px auto;
     max-width: 700px;
@@ -157,7 +156,6 @@ main {
 
 /* Single project card - horizontal academic layout */
 .project-card {
-    background-color: #ffffff;
     border: 1px solid #bdc3c7;
     border-radius: 0;
     overflow: hidden;
@@ -241,7 +239,6 @@ main {
 footer {
     text-align: center;
     padding: 30px 20px;
-    background-color: #ffffff;
     color: #7f8c8d;
     margin-top: 60px;
     font-size: 0.9em;
