@@ -29,8 +29,12 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #2c3e50;
+    background-image: url('../assets/images/background.svg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #000000;
     line-height: 1.7;
     font-size: 16px;
 }
@@ -125,21 +129,21 @@ main {
     font-size: 2.4em;
     font-weight: 300;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #000000;
     letter-spacing: -0.5px;
 }
 
 /* User bio - academic description with justified text */
 #user-bio {
     font-size: 1.1em;
-    color: #7f8c8d;
+    color: #000000;
     line-height: 1.8;
     margin-bottom: 0;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     font-style: normal;
-    text-align: center;
+    text-align: justify;
 }
 
 /* ==========================================
@@ -155,9 +159,9 @@ main {
 /* Projects section title */
 #projects-section h2 {
     font-size: 2.2em;
-    font-weight: 300;
+    font-weight: 700;
     margin-bottom: 40px;
-    color: #2c3e50;
+    color: #000000;
     text-align: left;
     border-bottom: 1px solid #bdc3c7;
     padding-bottom: 15px;
@@ -222,14 +226,14 @@ main {
     font-size: 1.3em;
     font-weight: 400;
     margin: 0 0 12px 0;
-    color: #2c3e50;
+    color: #000000;
     line-height: 1.4;
 }
 
 /* Project description - academic style */
 .project-info p {
     font-size: 0.95em;
-    color: #7f8c8d;
+    color: #000000;
     line-height: 1.6;
     margin: 0 0 12px 0;
     font-style: normal;
@@ -238,21 +242,16 @@ main {
 /* GitHub link styling - simplified */
 .github-link {
     display: inline-block;
-    padding: 8px 16px;
-    background-color: #2c3e50;
-    color: #ffffff;
+    color: #3498db;
     text-decoration: none;
-    border-radius: 0;
     font-size: 0.85em;
     font-weight: 400;
-    border: 1px solid #2c3e50;
     margin-top: 8px;
 }
 
 .github-link:hover {
-    background-color: #34495e;
-    border-color: #34495e;
-    color: #ffffff;
+    text-decoration: underline;
+    color: #2980b9;
 }
 
 /* ==========================================
@@ -317,9 +316,9 @@ footer a:hover {
     #user-bio {
         font-size: 1em;
     }
-    
-    #projects-section h2 {
+      #projects-section h2 {
         font-size: 1.8em;
+        font-weight: 700;
         text-align: center;
     }
     
@@ -378,9 +377,9 @@ footer a:hover {
     #user-bio {
         font-size: 0.95em;
     }
-    
-    #projects-section h2 {
+      #projects-section h2 {
         font-size: 1.6em;
+        font-weight: 700;
     }
       .project-thumbnail {
         height: 100px;
