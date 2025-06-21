@@ -29,14 +29,25 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../assets/images/background.svg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-color: #ffffff;
     color: #000000;
     line-height: 1.7;
     font-size: 16px;
+    position: relative;
+}
+
+/* Top fixed background image */
+.top-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-image: url('../assets/images/background.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
 /* ==========================================
@@ -82,7 +93,7 @@ main {
     position: relative;
 }
 
-/* Profile content container for avatar and background positioning */
+/* Profile content container for avatar positioning */
 .profile-content {
     position: relative;
     display: inline-block;
@@ -102,23 +113,6 @@ main {
 
 /* Avatar image */
 #avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Background image positioned behind avatar - simplified */
-.background-image {
-    position: absolute;
-    top: -60px;
-    left: -120px;
-    width: 360px;
-    height: 240px;
-    z-index: 1;
-    opacity: 0.3;
-}
-
-#background {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -285,6 +279,10 @@ footer a:hover {
 
 /* Tablet and smaller screens */
 @media (max-width: 768px) {
+    .top-background {
+        height: 160px;
+    }
+    
     main {
         padding: 0 15px;
     }
@@ -297,16 +295,9 @@ footer a:hover {
     .profile-content {
         margin-bottom: 20px;
     }
-    
-    .avatar-container {
+      .avatar-container {
         width: 100px;
         height: 100px;
-    }
-      .background-image {
-        width: 280px;
-        height: 180px;
-        top: -40px;
-        left: -80px;
     }
     
     #user-name {
@@ -350,6 +341,10 @@ footer a:hover {
 
 /* Small mobile screens */
 @media (max-width: 480px) {
+    .top-background {
+        height: 140px;
+    }
+    
     #main-header {
         padding: 20px 0 10px 0;
     }
@@ -358,16 +353,9 @@ footer a:hover {
         padding: 20px 15px;
         margin-bottom: 30px;
     }
-    
-    .avatar-container {
+      .avatar-container {
         width: 90px;
         height: 90px;
-    }
-      .background-image {
-        width: 220px;
-        height: 140px;
-        top: -30px;
-        left: -60px;
     }
     
     #user-name {
