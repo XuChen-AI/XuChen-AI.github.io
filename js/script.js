@@ -174,7 +174,19 @@ async function loadProjectConfig(configPath) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return await response.json();
+        const yamlText = await response.text();
+        const yamlData = jsyaml.load(yamlText);
+        
+        // Convert YAML structure to expected format
+        return {
+            projectInfo: {
+                title: yamlData.title,
+                shortDescription: yamlData.description
+            },
+            links: {
+                githubUrl: yamlData.github
+            }
+        };
     } catch (error) {
         console.error(`Failed to load project config: ${configPath}`, error);
         throw error;
@@ -195,7 +207,7 @@ function createProjectCard(projectConfig, projectRef) {
     projectContent.classList.add('project-content');
     
     const thumbnail = document.createElement('img');
-    thumbnail.src = `projects/${project.id}/${project.thumbnailUrl}` || '';
+    thumbnail.src = projectRef.imagePath || '';
     thumbnail.alt = project.title + ' thumbnail';
     thumbnail.classList.add('project-thumbnail');
     
@@ -209,7 +221,8 @@ function createProjectCard(projectConfig, projectRef) {
     
     const title = document.createElement('h3');
     title.textContent = project.title;
-      const description = document.createElement('p');
+    
+    const description = document.createElement('p');
     description.textContent = project.shortDescription || 'No description available';
     
     // Create GitHub link if available

@@ -12,22 +12,21 @@
         "title": "Xu Chen - Academic Homepage",
         "description": "Personal academic homepage showcasing research projects and achievements in AI, computer vision, and deep learning.",
         "keywords": "Artificial Intelligence, Deep Learning, Computer Vision, Academic Research, Machine Learning"
-    },
-    "projects": [
+    },    "projects": [
         {
             "id": "project1",
-            "configPath": "projects/project1/config/config.json",
-            "detailPageUrl": "projects/project1/index.html"
+            "configPath": "project/project1/config.yaml",
+            "imagePath": "project/project1/picture.svg"
         },
         {
             "id": "project2",
-            "configPath": "projects/project2/config/config.json",
-            "detailPageUrl": "projects/project2/index.html"
+            "configPath": "project/project2/config.yaml",
+            "imagePath": "project/project2/picture.svg"
         },
         {
             "id": "project3",
-            "configPath": "projects/project3/config/config.json",
-            "detailPageUrl": "projects/project3/index.html"
+            "configPath": "project/project3/config.yaml",
+            "imagePath": "project/project3/picture.svg"
         }
     ],
     "socialLinks": {

@@ -74,7 +74,7 @@ main {
     text-align: center;
     border: none;
     box-shadow: none;
-    border-bottom: 2px solid #ecf0f1;
+    border-bottom: 1px solid #bdc3c7;
     position: relative;
 }
 
@@ -91,14 +91,9 @@ main {
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #ecf0f1;
-    transition: none;
+    border: 2px solid #bdc3c7;
     position: relative;
     z-index: 2;
-}
-
-.avatar-container:hover {
-    transform: none;
 }
 
 /* Avatar image */
@@ -108,15 +103,15 @@ main {
     object-fit: cover;
 }
 
-/* Background image positioned behind avatar */
+/* Background image positioned behind avatar - simplified */
 .background-image {
     position: absolute;
-    top: -20px;
-    left: -40px;
-    width: 200px;
-    height: 160px;
+    top: -60px;
+    left: -120px;
+    width: 360px;
+    height: 240px;
     z-index: 1;
-    opacity: 0.8;
+    opacity: 0.3;
 }
 
 #background {
@@ -128,7 +123,7 @@ main {
 /* User name - academic style */
 #user-name {
     font-size: 2.4em;
-    font-weight: 400;
+    font-weight: 300;
     margin-bottom: 15px;
     color: #2c3e50;
     letter-spacing: -0.5px;
@@ -143,9 +138,8 @@ main {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    font-style: italic;
-    text-align: justify;
-    text-justify: inter-word;
+    font-style: normal;
+    text-align: center;
 }
 
 /* ==========================================
@@ -161,11 +155,11 @@ main {
 /* Projects section title */
 #projects-section h2 {
     font-size: 2.2em;
-    font-weight: 400;
+    font-weight: 300;
     margin-bottom: 40px;
     color: #2c3e50;
     text-align: left;
-    border-bottom: 2px solid #ecf0f1;
+    border-bottom: 1px solid #bdc3c7;
     padding-bottom: 15px;
 }
 
@@ -181,22 +175,19 @@ main {
 /* Single project card - horizontal academic layout */
 .project-card {
     background-color: #ffffff;
-    border: 1px solid #ecf0f1;
-    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 0;
     overflow: hidden;
-    transition: border-color 0.3s ease;
     display: flex;
     align-items: flex-start;
     min-height: 140px;
     box-shadow: none;
-    padding: 20px;
+    padding: 25px;
 }
 
-/* Project card hover effect - subtle */
+/* Project card hover effect - minimal */
 .project-card:hover {
-    border-color: #bdc3c7;
-    transform: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: #95a5a6;
 }
 
 /* Project card content - no clickable links to detail pages */
@@ -213,13 +204,8 @@ main {
     height: 100px;
     object-fit: cover;
     flex-shrink: 0;
-    border-radius: 4px;
-    border: 1px solid #ecf0f1;
-}
-
-/* Remove thumbnail hover effects */
-.project-card:hover .project-thumbnail {
-    transform: none;
+    border-radius: 0;
+    border: 1px solid #bdc3c7;
 }
 
 /* Project info area - main content on right */
@@ -234,7 +220,7 @@ main {
 /* Project title - academic style */
 .project-info h3 {
     font-size: 1.3em;
-    font-weight: 500;
+    font-weight: 400;
     margin: 0 0 12px 0;
     color: #2c3e50;
     line-height: 1.4;
@@ -246,27 +232,27 @@ main {
     color: #7f8c8d;
     line-height: 1.6;
     margin: 0 0 12px 0;
-    font-style: italic;
+    font-style: normal;
 }
 
-/* GitHub link styling */
+/* GitHub link styling - simplified */
 .github-link {
     display: inline-block;
     padding: 8px 16px;
-    background-color: #f8f9fa;
-    color: #24292e;
+    background-color: #2c3e50;
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.9em;
-    font-weight: 500;
-    border: 1px solid #d0d7de;
-    transition: all 0.2s ease;
+    border-radius: 0;
+    font-size: 0.85em;
+    font-weight: 400;
+    border: 1px solid #2c3e50;
+    margin-top: 8px;
 }
 
 .github-link:hover {
-    background-color: #f3f4f6;
-    border-color: #9ca3af;
-    color: #111827;
+    background-color: #34495e;
+    border-color: #34495e;
+    color: #ffffff;
 }
 
 /* ==========================================
@@ -281,7 +267,7 @@ footer {
     color: #7f8c8d;
     margin-top: 60px;
     font-size: 0.9em;
-    border-top: 1px solid #ecf0f1;
+    border-top: 1px solid #bdc3c7;
 }
 
 footer a {
@@ -317,12 +303,11 @@ footer a:hover {
         width: 100px;
         height: 100px;
     }
-    
-    .background-image {
-        width: 160px;
-        height: 130px;
-        top: -15px;
-        left: -30px;
+      .background-image {
+        width: 280px;
+        height: 180px;
+        top: -40px;
+        left: -80px;
     }
     
     #user-name {
@@ -348,11 +333,11 @@ footer a:hover {
         text-align: center;
         gap: 15px;
     }
-    
-    .project-thumbnail {
+      .project-thumbnail {
         width: 100%;
         height: 120px;
         max-width: 280px;
+        border-radius: 0;
     }
     
     .project-info {
@@ -379,12 +364,11 @@ footer a:hover {
         width: 90px;
         height: 90px;
     }
-    
-    .background-image {
-        width: 140px;
-        height: 110px;
-        top: -12px;
-        left: -25px;
+      .background-image {
+        width: 220px;
+        height: 140px;
+        top: -30px;
+        left: -60px;
     }
     
     #user-name {
@@ -398,9 +382,9 @@ footer a:hover {
     #projects-section h2 {
         font-size: 1.6em;
     }
-    
-    .project-thumbnail {
+      .project-thumbnail {
         height: 100px;
+        border-radius: 0;
     }
     
     .project-info h3 {
