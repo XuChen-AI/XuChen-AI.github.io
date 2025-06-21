@@ -3,14 +3,14 @@
  * Academic Homepage JavaScript (script.js)
  * ==========================================
  * 
- * Author: Dr. Xu Chen
- * Version: 3.0
+ * Author: Xu Chen
+ * Version: 4.0
  * Last Modified: 2025年6月21日
  * 
  * Description:
  * Clean, minimal JavaScript for academic homepage
- * Focuses on content loading and basic functionality
- * Removed decorative elements for academic simplicity
+ * Only contains main page functionality
+ * Projects display with GitHub links only
  */
 
 /* ==========================================
@@ -60,7 +60,8 @@ function useDefaultConfig() {
         personalInfo: {
             userName: "Your Name",
             userBio: "Your academic bio and research interests.",
-            avatarImageUrl: "assets/images/avatar.svg"
+            avatarImageUrl: "assets/images/avatar.svg",
+            headerBackgroundImageUrl: "assets/images/background.svg"
         },
         projects: []
     };
@@ -94,7 +95,8 @@ function updatePersonalInfo() {
     if (userNameElement) {
         userNameElement.textContent = personalInfo.userName;
     }
-      // Update bio
+    
+    // Update bio
     const userBioElement = document.getElementById('user-bio');
     if (userBioElement) {
         userBioElement.innerHTML = personalInfo.userBio;
@@ -109,6 +111,18 @@ function updatePersonalInfo() {
         avatarElement.onerror = function() {
             console.warn('Avatar image failed to load');
             this.src = generatePlaceholderImage('Avatar', 120, 120);
+        };
+    }
+    
+    // Update background image
+    const backgroundElement = document.getElementById('background');
+    if (backgroundElement && personalInfo.headerBackgroundImageUrl) {
+        backgroundElement.src = personalInfo.headerBackgroundImageUrl;
+        backgroundElement.alt = 'Background image';
+        
+        backgroundElement.onerror = function() {
+            console.warn('Background image failed to load');
+            this.style.display = 'none';
         };
     }
     
@@ -177,9 +191,8 @@ function createProjectCard(projectConfig, projectRef) {
     const projectCard = document.createElement('div');
     projectCard.classList.add('project-card');
     
-    const projectLink = document.createElement('a');
-    projectLink.href = projectRef.detailPageUrl || `projects/${project.id}/index.html`;
-    projectLink.setAttribute('aria-label', `View project: ${project.title}`);
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
     
     const thumbnail = document.createElement('img');
     thumbnail.src = `projects/${project.id}/${project.thumbnailUrl}` || '';
@@ -196,160 +209,39 @@ function createProjectCard(projectConfig, projectRef) {
     
     const title = document.createElement('h3');
     title.textContent = project.title;
-    
-    const description = document.createElement('p');
+      const description = document.createElement('p');
     description.textContent = project.shortDescription || 'No description available';
     
+    // Create GitHub link if available
+    let githubLink = null;
+    if (projectConfig.links && projectConfig.links.githubUrl) {
+        githubLink = document.createElement('a');
+        githubLink.href = projectConfig.links.githubUrl;
+        githubLink.textContent = 'GitHub';
+        githubLink.classList.add('github-link');
+        githubLink.target = '_blank';
+        githubLink.rel = 'noopener noreferrer';
+    }
+    
     projectInfo.appendChild(title);
     projectInfo.appendChild(description);
-    projectLink.appendChild(thumbnail);
-    projectLink.appendChild(projectInfo);
-    projectCard.appendChild(projectLink);
+    if (githubLink) {
+        projectInfo.appendChild(githubLink);
+    }
+    
+    projectContent.appendChild(thumbnail);
+    projectContent.appendChild(projectInfo);
+    projectCard.appendChild(projectContent);
     
     return projectCard;
 }
 
-/**
- * 创建错误项目卡片（当项目配置加载失败时使用）
- * @param {Object} projectRef - 项目引用对象
- * @returns {HTMLElement} 错误卡片DOM元素
- */
-function createErrorProjectCard(projectRef) {
-    const projectCard = document.createElement('div');
-    projectCard.classList.add('project-card', 'error-card');
-    
-    const projectInfo = document.createElement('div');
-    projectInfo.classList.add('project-info');
-    
-    const title = document.createElement('h3');
-    title.textContent = `项目 ${projectRef.id}`;
-    
-    const description = document.createElement('p');
-    description.textContent = '项目配置加载失败';
-    description.style.color = '#e74c3c';
-    
-    projectInfo.appendChild(title);
-    projectInfo.appendChild(description);
-    projectCard.appendChild(projectInfo);
-    
-    return projectCard;
-}
-
-/**
- * 更新页脚信息
- * 设置当前年份和个人信息
- */
-/**
- * 更新页脚信息
- * 设置当前年份和个人信息
- */
-function updateFooter() {
-    // 更新当前年份
-    const currentYearSpan = document.getElementById('current-year');
-    if (currentYearSpan) {
-        const currentYear = new Date().getFullYear();
-        currentYearSpan.textContent = currentYear;
-        console.log('页脚年份已更新:', currentYear);
-    }
-    
-    // 如果有个人信息，更新页脚中的姓名
-    const footerNameElements = document.querySelectorAll('footer p');
-    if (footerNameElements.length > 0 && config && config.personalInfo) {
-        footerNameElements[0].innerHTML = footerNameElements[0].innerHTML.replace(
-            '您的名字', 
-            config.personalInfo.userName
-        );
-        console.log('页脚姓名已更新');
-    }
-}
-
-/* ==========================================
- * 工具函数
- * ==========================================
- */
-
-/**
- * 生成占位图片的SVG数据URL
- * 当图片加载失败时使用
- * @param {string} text - 占位图上显示的文字
- * @param {number} width - 图片宽度
- * @param {number} height - 图片高度
- * @returns {string} SVG数据URL
- */
-function generatePlaceholderImage(text, width, height) {
-    const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-            <rect width="${width}" height="${height}" fill="#f0f0f0"/>
-            <text x="${width/2}" y="${height/2}" text-anchor="middle" dy="0.3em" 
-                  font-family="Arial, sans-serif" font-size="14" fill="#999">
-                ${text}
-            </text>
-        </svg>
-    `;
-    return 'data:image/svg+xml,' + encodeURIComponent(svg);
-}
-
-/* ==========================================
- * 工具函数和事件处理
- * ==========================================
- */
-
-/**
- * 防抖函数
- * 限制函数的执行频率，防止频繁触发
- * @param {Function} func - 要防抖的函数
- * @param {number} wait - 等待时间（毫秒）
- * @returns {Function} 防抖后的函数
- */
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/* ==========================================
- * 全局事件监听器
- * ==========================================
- */
-
-/**
- * 窗口大小改变事件监听器
- * 使用防抖处理响应式调整
- */
-window.addEventListener('resize', debounce(() => {
-    console.log('窗口大小已改变，触发响应式调整');
-    // 可以在这里添加响应式调整逻辑
-    // 例如：重新计算项目网格布局、调整图片大小等
-}, 250));
-
-/**
- * 页面完全加载完成事件监听器
- * 在所有资源（包括图片、样式表等）加载完成后触发
- */
-window.addEventListener('load', () => {
-    console.log('页面及所有资源加载完成');
-    // 可以在这里添加需要在所有资源加载完成后执行的逻辑
-    // 例如：性能监控、用户行为追踪等
-});
-
-/**
- * 页面卸载前事件监听器
- * 在用户离开页面前进行清理工作
- */
-window.addEventListener('beforeunload', () => {
-    console.log('页面即将卸载，执行清理工作');
-    // 可以在这里添加清理逻辑
-    // 例如：保存用户状态、清理定时器等
-});
 function createErrorProjectCard(projectRef) {
     const projectCard = document.createElement('div');
     projectCard.classList.add('project-card');
+    
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
     
     const projectInfo = document.createElement('div');
     projectInfo.classList.add('project-info');
@@ -365,7 +257,8 @@ function createErrorProjectCard(projectRef) {
     
     projectInfo.appendChild(title);
     projectInfo.appendChild(description);
-    projectCard.appendChild(projectInfo);
+    projectContent.appendChild(projectInfo);
+    projectCard.appendChild(projectContent);
     
     return projectCard;
 }
@@ -385,7 +278,7 @@ function generatePlaceholderImage(text, width, height) {
     ctx.fillRect(0, 0, width, height);
     
     ctx.fillStyle = '#7f8c8d';
-    ctx.font = '14px Georgia';
+    ctx.font = '14px Arial, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(text, width / 2, height / 2 + 5);
     

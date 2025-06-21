@@ -3,7 +3,7 @@
  * Academic Homepage Styles (homepage.css)
  * ==========================================
  * 
- * Author: Dr. Xu Chen
+ * Author: Xu Chen
  * Version: 3.0
  * Last Modified: 2025年6月21日
  * 
@@ -26,7 +26,7 @@
  * ==========================================
  */
 body {
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -65,7 +65,7 @@ main {
     padding: 0 20px;
 }
 
-/* Profile section - simplified academic style */
+/* Profile section - simplified academic style with background */
 #profile {
     background-color: #ffffff;
     padding: 40px 20px;
@@ -75,17 +75,26 @@ main {
     border: none;
     box-shadow: none;
     border-bottom: 2px solid #ecf0f1;
+    position: relative;
+}
+
+/* Profile content container for avatar and background positioning */
+.profile-content {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
 /* Avatar container - smaller, cleaner */
 .avatar-container {
     width: 120px;
     height: 120px;
-    margin: 0 auto 30px auto;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #ecf0f1;
     transition: none;
+    position: relative;
+    z-index: 2;
 }
 
 .avatar-container:hover {
@@ -94,6 +103,23 @@ main {
 
 /* Avatar image */
 #avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Background image positioned behind avatar */
+.background-image {
+    position: absolute;
+    top: -20px;
+    left: -40px;
+    width: 200px;
+    height: 160px;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+#background {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -108,7 +134,7 @@ main {
     letter-spacing: -0.5px;
 }
 
-/* User bio - academic description */
+/* User bio - academic description with justified text */
 #user-bio {
     font-size: 1.1em;
     color: #7f8c8d;
@@ -118,7 +144,8 @@ main {
     margin-left: auto;
     margin-right: auto;
     font-style: italic;
-    text-align: left;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* ==========================================
@@ -158,11 +185,11 @@ main {
     border-radius: 8px;
     overflow: hidden;
     transition: border-color 0.3s ease;
-    cursor: pointer;
     display: flex;
     align-items: flex-start;
     min-height: 140px;
     box-shadow: none;
+    padding: 20px;
 }
 
 /* Project card hover effect - subtle */
@@ -172,14 +199,11 @@ main {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Project card link */
-.project-card a {
+/* Project card content - no clickable links to detail pages */
+.project-content {
     display: flex;
     align-items: flex-start;
-    text-decoration: none;
-    color: inherit;
     width: 100%;
-    padding: 20px;
     gap: 25px;
 }
 
@@ -221,8 +245,28 @@ main {
     font-size: 0.95em;
     color: #7f8c8d;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 12px 0;
     font-style: italic;
+}
+
+/* GitHub link styling */
+.github-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    color: #24292e;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid #d0d7de;
+    transition: all 0.2s ease;
+}
+
+.github-link:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+    color: #111827;
 }
 
 /* ==========================================
@@ -265,10 +309,20 @@ footer a:hover {
         margin-bottom: 40px;
     }
     
+    .profile-content {
+        margin-bottom: 20px;
+    }
+    
     .avatar-container {
         width: 100px;
         height: 100px;
-        margin-bottom: 20px;
+    }
+    
+    .background-image {
+        width: 160px;
+        height: 130px;
+        top: -15px;
+        left: -30px;
     }
     
     #user-name {
@@ -289,10 +343,9 @@ footer a:hover {
     }
     
     /* Project cards stack vertically on mobile */
-    .project-card a {
+    .project-content {
         flex-direction: column;
         text-align: center;
-        padding: 15px;
         gap: 15px;
     }
     
@@ -325,6 +378,13 @@ footer a:hover {
     .avatar-container {
         width: 90px;
         height: 90px;
+    }
+    
+    .background-image {
+        width: 140px;
+        height: 110px;
+        top: -12px;
+        left: -25px;
     }
     
     #user-name {
