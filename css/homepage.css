@@ -1,376 +1,307 @@
 /*
  * ==========================================
- * 个人学术主页样式文件 (homepage.css)
+ * Academic Homepage Styles (homepage.css)
  * ==========================================
  * 
- * 作者：Dr. Xu Chen
- * 版本：2.0
- * 创建日期：2025年6月14日
- * 最后修改：2025年6月14日
+ * Author: Dr. Xu Chen
+ * Version: 3.0
+ * Last Modified: 2025年6月21日
  * 
- * 描述：
- * 这是个人学术主页的样式表，采用响应式设计
- * 支持桌面端、平板和移动端的完美显示
- * 只负责主页的样式，项目详情页有各自的CSS文件
+ * Description:
+ * Clean, academic-style homepage design with flat UI principles
+ * Consistent styling across all pages
+ * Responsive design for all devices
  * 
- * 颜色方案：
- * - 主色调：#007bff (蓝色)
- * - 背景色：#f4f4f4 (浅灰)
- * - 文字色：#333 (深灰)
- * - 次要文字：#666, #555 (中灰)
- * - 白色背景：#fff
- * 
- * 断点设置：
- * - 移动端：< 768px
- * - 平板端：768px - 1024px
- * - 桌面端：> 1024px
+ * Color Scheme:
+ * - Primary: #2c3e50 (Dark blue-gray)
+ * - Secondary: #3498db (Blue)
+ * - Background: #ffffff (White)
+ * - Text: #2c3e50 (Dark)
+ * - Muted text: #7f8c8d (Gray)
+ * - Accent: #e74c3c (Red for highlights)
  */
 
 /* ==========================================
- * 1. 基础样式设置
+ * 1. Base Styles
  * ==========================================
  */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Georgia', 'Times New Roman', serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+    background-color: #ffffff;
+    color: #2c3e50;
+    line-height: 1.7;
+    font-size: 16px;
 }
 
 /* ==========================================
- * 2. 主页布局样式
+ * 2. Header and Navigation
  * ==========================================
  */
 
-/* 头部背景图片容器 */
+/* Simplified header - remove decorative background */
 #main-header {
-    position: relative;
-    height: 300px;
-    background-image: url('../assets/images/background.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: none;
+    height: auto;
+    padding: 40px 0 20px 0;
+    text-align: center;
 }
 
-/* 头部背景遮罩 */
+/* Remove header overlay */
 #main-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
+    display: none;
 }
 
-/* 主要内容区域 */
+/* ==========================================
+ * 3. Main Content Layout
+ * ==========================================
+ */
+
+/* Main content container */
 main {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* 个人资料区域 */
+/* Profile section - simplified academic style */
 #profile {
-    background-color: #fff;
-    padding: 30px;
-    margin: -100px auto 40px auto;
-    max-width: 800px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 40px 20px;
+    margin: 0 auto 60px auto;
+    max-width: 700px;
     text-align: center;
-    position: relative;
-    z-index: 2;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #ecf0f1;
 }
 
-/* 头像容器 */
+/* Avatar container - smaller, cleaner */
 .avatar-container {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px auto;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px auto;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
+    border: 3px solid #ecf0f1;
+    transition: none;
 }
 
 .avatar-container:hover {
-    transform: scale(1.05);
+    transform: none;
 }
 
-/* 头像图片 */
+/* Avatar image */
 #avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
 }
 
-/* 用户名样式 */
+/* User name - academic style */
 #user-name {
-    font-size: 2.2em;
-    font-weight: 300;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 2.4em;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    letter-spacing: -0.5px;
 }
 
-/* 用户简介样式 */
+/* User bio - academic description */
 #user-bio {
     font-size: 1.1em;
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    color: #7f8c8d;
+    line-height: 1.8;
+    margin-bottom: 0;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-}
-
-/* 联系信息样式 */
-.contact-info {
-    font-size: 1em;
-    color: #555;
-    margin-bottom: 25px;
-}
-
-.contact-info div {
-    margin-bottom: 5px;
-}
-
-/* 社交链接容器 */
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-/* 社交链接样式 */
-.social-link {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    font-size: 0.9em;
-    font-weight: 500;
-}
-
-.social-link:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-style: italic;
 }
 
 /* ==========================================
- * 3. 项目展示样式
+ * 4. Projects Section - Academic List Style
  * ==========================================
  */
 
-/* 项目区域容器 */
+/* Projects section container */
 #projects-section {
-    margin: 40px 0;
+    margin: 60px 0;
 }
 
-/* 项目区域标题 */
+/* Projects section title */
 #projects-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
     font-size: 2.2em;
-    font-weight: 300;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    text-align: left;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 15px;
 }
 
-/* 项目网格布局容器 - 修改为行布局 */
+/* Projects grid - vertical list layout */
 #projects-grid {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* 单个项目卡片样式 - 修改为横向布局 */
-.project-card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    min-height: 120px;
-}
-
-/* 项目卡片悬停效果 */
-.project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* 项目卡片链接 */
-.project-card a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
-}
-
-/* 项目缩略图样式 - 修改为固定尺寸 */
-.project-thumbnail {
-    width: 200px;
-    height: 120px;
-    object-fit: cover;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-}
-
-/* 缩略图悬停效果 */
-.project-card:hover .project-thumbnail {
-    transform: scale(1.05);
-}
-
-/* 项目信息区域 - 修改为右侧布局 */
-.project-info {
-    padding: 20px 25px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* 项目标题 - 调整样式 */
-.project-info h3 {
-    font-size: 1.4em;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-    color: #333;
-    line-height: 1.3;
-}
-
-/* 项目简介 - 调整样式 */
-.project-info p {
-    font-size: 0.95em;
-    color: #666;
-    line-height: 1.5;
+    gap: 40px;
+    max-width: 100%;
     margin: 0;
 }
 
+/* Single project card - horizontal academic layout */
+.project-card {
+    background-color: #ffffff;
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    min-height: 140px;
+    box-shadow: none;
+}
+
+/* Project card hover effect - subtle */
+.project-card:hover {
+    border-color: #bdc3c7;
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Project card link */
+.project-card a {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    padding: 20px;
+    gap: 25px;
+}
+
+/* Project thumbnail - fixed size on left */
+.project-thumbnail {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #ecf0f1;
+}
+
+/* Remove thumbnail hover effects */
+.project-card:hover .project-thumbnail {
+    transform: none;
+}
+
+/* Project info area - main content on right */
+.project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+}
+
+/* Project title - academic style */
+.project-info h3 {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+/* Project description - academic style */
+.project-info p {
+    font-size: 0.95em;
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+}
 
 /* ==========================================
- * 4. 页脚样式
+ * 5. Footer - Simplified
  * ==========================================
  */
 
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-    margin-top: 40px;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    color: #7f8c8d;
+    margin-top: 60px;
     font-size: 0.9em;
+    border-top: 1px solid #ecf0f1;
 }
 
 footer a {
-    color: #007bff;
+    color: #3498db;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #66b3ff;
     text-decoration: underline;
 }
 
 /* ==========================================
- * 5. 响应式设计
+ * 6. Responsive Design
  * ==========================================
  */
 
-/* 移动设备适配 (最大宽度 768px) */
+/* Tablet and smaller screens */
 @media (max-width: 768px) {
-    /* 头部背景调整 */
-    .header-background {
-        height: 200px;
-    }
-    
-    /* 主内容区域移动端调整 */
     main {
-        margin: 10px auto;
         padding: 0 15px;
     }
     
-    /* 个人资料区域移动端调整 */
     #profile {
-        margin-top: -50px;
-        padding: 20px;
-        margin-bottom: 30px;
+        padding: 30px 20px;
+        margin-bottom: 40px;
     }
     
-    /* 头像容器移动端调整 */
     .avatar-container {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 15px;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
     }
     
-    /* 用户名移动端调整 */
-    .user-name {
-        font-size: 1.8em;
+    #user-name {
+        font-size: 2em;
     }
     
-    /* 用户简介移动端调整 */
-    .user-bio {
+    #user-bio {
         font-size: 1em;
     }
     
-    /* 社交链接移动端调整 */
-    .social-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .social-link {
-        width: 200px;
+    #projects-section h2 {
+        font-size: 1.8em;
         text-align: center;
     }
     
-    /* 项目区域移动端调整 */
-    #projects-section h2 {
-        font-size: 1.8em;
-    }
-      /* 项目网格移动端调整 */
     #projects-grid {
-        gap: 20px;
+        gap: 25px;
     }
     
-    /* 项目卡片移动端调整 - 改为垂直布局 */
-    .project-card {
-        flex-direction: column;
-        min-height: auto;
-    }
-    
+    /* Project cards stack vertically on mobile */
     .project-card a {
         flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        gap: 15px;
     }
     
     .project-thumbnail {
         width: 100%;
-        height: 160px;
+        height: 120px;
+        max-width: 280px;
     }
     
     .project-info {
-        padding: 15px;
         text-align: center;
     }
     
@@ -379,60 +310,43 @@ footer a:hover {
     }
 }
 
-/* 小屏幕设备适配 (最大宽度 480px) */
+/* Small mobile screens */
 @media (max-width: 480px) {
-    /* 头部背景进一步调整 */
-    .header-background {
-        height: 150px;
+    #main-header {
+        padding: 20px 0 10px 0;
     }
     
-    /* 个人资料区域小屏调整 */
     #profile {
-        margin-top: -30px;
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: 20px 15px;
+        margin-bottom: 30px;
     }
     
-    /* 头像容器小屏调整 */
     .avatar-container {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
     
-    /* 用户名小屏调整 */
-    .user-name {
-        font-size: 1.6em;
+    #user-name {
+        font-size: 1.8em;
     }
     
-    /* 用户简介小屏调整 */
-    .user-bio {
+    #user-bio {
         font-size: 0.95em;
     }
     
-    /* 联系信息小屏调整 */
-    .contact-info {
-        font-size: 0.9em;
-    }
-    
-    /* 项目标题小屏调整 */
     #projects-section h2 {
         font-size: 1.6em;
     }
     
-    /* 项目卡片小屏调整 */
     .project-thumbnail {
-        height: 150px;
+        height: 100px;
     }
     
-    .project-info {
-        padding: 12px;
-    }
-    
-    .project-title {
+    .project-info h3 {
         font-size: 1.1em;
     }
     
-    .project-description {
+    .project-info p {
         font-size: 0.9em;
     }
 }

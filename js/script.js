@@ -1,344 +1,206 @@
 /**
  * ==========================================
- * 个人学术主页 JavaScript 主文件 (script.js)
+ * Academic Homepage JavaScript (script.js)
  * ==========================================
  * 
- * 作者：[您的姓名]
- * 版本：3.0
- * 创建日期：[创建日期]
- * 最后修改：2025年6月14日
+ * Author: Dr. Xu Chen
+ * Version: 3.0
+ * Last Modified: 2025年6月21日
  * 
- * 功能描述：
- * 这是个人学术主页的核心JavaScript文件，负责：
- * 1. 动态加载配置文件和个人信息
- * 2. 渲染项目列表卡片
- * 3. 处理主页图片和文本显示
- * 4. 提供响应式交互功能
- * 
- * 注意：项目详情页功能已移动到各个项目文件夹的独立JS文件中
- * 
- * 文件结构：
- * - 配置管理：加载和处理配置文件
- * - 页面初始化：设置个人信息和项目数据
- * - 项目展示：动态生成项目卡片（仅主页）
- * - 工具函数：辅助功能和响应式处理
- * 
- * 依赖项：
- * - config/config.json：配置文件
- * - 现代浏览器的 Fetch API 支持
- * 
- * 浏览器兼容性：
- * - Chrome 60+, Firefox 60+, Safari 12+, Edge 79+
- * - 需要支持 ES6+ 语法 (async/await, 模板字符串等)
+ * Description:
+ * Clean, minimal JavaScript for academic homepage
+ * Focuses on content loading and basic functionality
+ * Removed decorative elements for academic simplicity
  */
 
 /* ==========================================
- * 全局变量声明
+ * Global Variables
  * ==========================================
  */
 
-/**
- * 全局配置对象
- * 存储从配置文件加载的所有设置信息
- * @type {Object|null}
- */
 let config = null;
 
 /* ==========================================
- * 页面初始化和事件监听
+ * Page Initialization
  * ==========================================
  */
 
-/**
- * DOM内容加载完成时的初始化函数
- * 这是整个应用的入口点，负责启动所有核心功能
- */
 document.addEventListener('DOMContentLoaded', async function() {
-    // 尝试从配置文件加载数据，如果失败则使用默认配置
     try {
         await loadConfig();
         await initializePage();
     } catch (error) {
-        console.warn('无法加载配置文件，使用默认配置');
+        console.warn('Failed to load config, using defaults');
         useDefaultConfig();
         await initializePage();
     }
 });
 
 /* ==========================================
- * 配置管理功能
+ * Configuration Management
  * ==========================================
  */
 
-/**
- * 异步加载配置文件
- * 从 config/config.json 文件中读取网站配置信息
- * @returns {Promise} 加载成功或失败的Promise
- * @throws {Error} 当配置文件无法加载时抛出错误
- */
 async function loadConfig() {
     try {
         const response = await fetch('config/config.json');
         if (!response.ok) {
-            throw new Error(`HTTP错误! 状态: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         config = await response.json();
-        console.log('配置文件加载成功');
+        console.log('Configuration loaded successfully');
     } catch (error) {
-        console.error('配置文件加载失败:', error);
+        console.error('Failed to load configuration:', error);
         throw error;
     }
 }
 
-/**
- * 使用默认配置数据
- * 当配置文件无法加载时，使用硬编码的默认配置
- * 这确保了网站在任何情况下都能正常显示基本内容
- */
 function useDefaultConfig() {
-    console.log('使用默认配置数据');
     config = {
         personalInfo: {
-            userName: "您的姓名",
-            userBio: "在这里写您的个人简介。介绍您的研究方向、兴趣等。",
-            avatarImageUrl: "assets/images/avatar.png",
-            headerBackgroundImageUrl: "assets/images/background.jpg"
+            userName: "Your Name",
+            userBio: "Your academic bio and research interests.",
+            avatarImageUrl: "assets/images/avatar.svg"
         },
-        projects: [
-            {
-                id: 'project1',
-                thumbnailUrl: 'assets/images/project1-thumb.jpg',
-                title: '项目一：AI辅助诊断系统',
-                shortDescription: '利用深度学习技术，辅助医生进行早期疾病诊断。',
-                detailContent: {
-                    images: ['projects/project1/images/demo1.jpg', 'projects/project1/images/architecture.jpg'],
-                    videos: ['projects/project1/videos/demo_video.mp4', 'projects/project1/videos/presentation.mp4'],
-                    textFile: 'projects/project1/texts/description.md',
-                    fullDescription: '<p>这是项目一的详细描述。我们使用了先进的深度学习模型，例如 CNN 和 RNN，来分析医学影像数据。</p><p>系统的准确率达到了95%，有效提高了早期诊断的效率。</p>',
-                    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-                    githubUrl: 'https://github.com/your-username/ai-diagnosis-system',
-                    tags: ['深度学习', '医学影像', 'AI诊断']
-                }
-            },
-            {
-                id: 'project2',
-                thumbnailUrl: 'assets/images/project2-thumb.jpg',
-                title: '项目二：个性化学习推荐引擎',
-                shortDescription: '根据学生的学习行为和偏好，智能推荐学习资源。',
-                detailContent: {
-                    images: ['projects/project2/images/system-overview.jpg'],
-                    videos: ['projects/project2/videos/system_demo.mp4', 'projects/project2/videos/user_interface.mp4'],
-                    textFile: 'projects/project2/texts/description.md',
-                    fullDescription: '<p>项目二专注于构建一个智能学习推荐系统。通过分析用户的学习历史和偏好，系统能够动态调整推荐内容。</p>',
-                    videoUrl: null,
-                    githubUrl: 'https://github.com/your-username/learning-recommendation',
-                    tags: ['推荐系统', '个性化学习', '数据挖掘']
-                }
-            },
-            {
-                id: 'project3',
-                thumbnailUrl: 'assets/images/project3-thumb.jpg',
-                title: '项目三：自动驾驶感知算法研究',
-                shortDescription: '研究和开发用于自动驾驶汽车的高精度环境感知算法。',
-                detailContent: {
-                    images: ['projects/project3/images/perception-pipeline.jpg', 'projects/project3/images/detection-results.jpg'],
-                    videos: ['projects/project3/videos/driving_demo.mp4', 'projects/project3/videos/real_road_test.mp4'],
-                    textFile: 'projects/project3/texts/description.md',
-                    fullDescription: '<p>本项目旨在提升自动驾驶汽车在复杂环境下的感知能力。我们重点研究了多传感器融合技术。</p>',
-                    videoUrl: 'https://www.youtube.com/embed/another-video-id',
-                    githubUrl: 'https://github.com/your-username/autonomous-perception',
-                    tags: ['自动驾驶', '计算机视觉', '传感器融合']
-                }
-            }
-        ]
+        projects: []
     };
 }
 
 /* ==========================================
- * 页面内容初始化
+ * Page Content Initialization
  * ==========================================
  */
 
-/**
- * 初始化页面所有内容
- * 协调各个模块的初始化过程
- */
 async function initializePage() {
-    console.log('开始初始化页面...');
+    console.log('Initializing page...');
     
     updatePersonalInfo();
-    await loadProjects(); // 异步加载项目
+    await loadProjects();
     updateFooter();
     
-    console.log('页面初始化完成');
+    console.log('Page initialization complete');
 }
 
-/**
- * 更新个人信息显示
- * 将配置文件中的个人信息应用到页面元素上
- */
 function updatePersonalInfo() {
-        // 检查配置数据是否存在
     if (!config || !config.personalInfo) {
-        console.warn('个人信息配置缺失，跳过个人信息更新');
+        console.warn('Personal info configuration missing');
         return;
     }
     
     const { personalInfo } = config;
     
-    // 更新用户姓名
+    // Update user name
     const userNameElement = document.getElementById('user-name');
     if (userNameElement) {
         userNameElement.textContent = personalInfo.userName;
-        console.log('用户姓名已更新:', personalInfo.userName);
     }
     
-    // 更新个人简介
+    // Update bio
     const userBioElement = document.getElementById('user-bio');
     if (userBioElement) {
         userBioElement.textContent = personalInfo.userBio;
-        console.log('个人简介已更新');
     }
     
-    // 更新头像图片
+    // Update avatar
     const avatarElement = document.getElementById('avatar');
     if (avatarElement) {
         avatarElement.src = personalInfo.avatarImageUrl;
-        avatarElement.alt = personalInfo.userName + ' 的头像';
+        avatarElement.alt = personalInfo.userName + "'s photo";
         
-        // 为头像添加加载错误处理
         avatarElement.onerror = function() {
-            console.warn('头像图片加载失败，使用默认占位图');
-            this.src = generatePlaceholderImage('头像', 150, 150);
+            console.warn('Avatar image failed to load');
+            this.src = generatePlaceholderImage('Avatar', 120, 120);
         };
     }
-      // 更新头部背景图片
-    const headerElement = document.getElementById('main-header');
-    if (headerElement && personalInfo.headerBackgroundImageUrl) {
-        headerElement.style.backgroundImage = `url('${personalInfo.headerBackgroundImageUrl}')`;
-        console.log('背景图片已更新');
-    } else if (headerElement) {
-        // 如果配置中没有背景图片，使用默认的
-        headerElement.style.backgroundImage = `url('assets/images/background.svg')`;
-        console.log('使用默认背景图片');
-    }
     
-    // 更新页面标题
+    // Update page title
     if (config.siteSettings && config.siteSettings.title) {
         document.title = config.siteSettings.title;
-        console.log('页面标题已更新:', config.siteSettings.title);
     }
 }
 
 /* ==========================================
- * 项目展示功能
+ * Projects Display
  * ==========================================
  */
 
-/**
- * 加载并显示项目列表
- * 在主页中动态生成项目卡片网格
- */
 async function loadProjects() {
     const projectsGrid = document.getElementById('projects-grid');
     if (!projectsGrid) {
-        console.warn('未找到项目网格容器元素');
+        console.warn('Projects grid container not found');
         return;
     }
     
     if (!config.projects || config.projects.length === 0) {
-        console.warn('没有项目数据可显示');
-        projectsGrid.innerHTML = '<p style="text-align: center; color: #666;">暂无项目展示</p>';
+        console.warn('No projects to display');
+        projectsGrid.innerHTML = '<p style="text-align: center; color: #7f8c8d; font-style: italic;">No projects available</p>';
         return;
     }
     
-    // 清空现有内容
     projectsGrid.innerHTML = '';
     
-    // 为每个项目动态加载配置并创建卡片
     for (const projectRef of config.projects) {
         try {
             const projectConfig = await loadProjectConfig(projectRef.configPath);
             const projectCard = createProjectCard(projectConfig, projectRef);
             projectsGrid.appendChild(projectCard);
-            console.log(`项目卡片已创建: ${projectConfig.projectInfo.title}`);
+            console.log(`Project card created: ${projectConfig.projectInfo.title}`);
         } catch (error) {
-            console.error(`加载项目配置失败 (${projectRef.id}):`, error);
-            // 创建错误占位卡片
+            console.error(`Failed to load project config (${projectRef.id}):`, error);
             const errorCard = createErrorProjectCard(projectRef);
             projectsGrid.appendChild(errorCard);
         }
     }
     
-    console.log(`成功加载 ${config.projects.length} 个项目`);
+    console.log(`Successfully loaded ${config.projects.length} projects`);
 }
 
-/**
- * 加载单个项目的配置文件
- * @param {string} configPath - 项目配置文件路径
- * @returns {Promise<Object>} 项目配置对象
- */
 async function loadProjectConfig(configPath) {
     try {
         const response = await fetch(configPath);
         if (!response.ok) {
-            throw new Error(`HTTP错误! 状态: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error(`加载项目配置失败: ${configPath}`, error);
+        console.error(`Failed to load project config: ${configPath}`, error);
         throw error;
     }
 }
 
-/**
- * 创建单个项目卡片元素
- * @param {Object} projectConfig - 项目配置数据对象
- * @param {Object} projectRef - 项目引用对象
- * @returns {HTMLElement} 项目卡片DOM元素
- */
 function createProjectCard(projectConfig, projectRef) {
-    // 验证项目数据
     if (!projectConfig || !projectConfig.projectInfo || !projectConfig.projectInfo.title) {
-        throw new Error('项目数据无效：缺少必要字段');
+        throw new Error('Invalid project data: missing required fields');
     }
     
     const project = projectConfig.projectInfo;
     
-    // 创建项目卡片容器
     const projectCard = document.createElement('div');
     projectCard.classList.add('project-card');
     
-    // 创建项目链接
     const projectLink = document.createElement('a');
     projectLink.href = projectRef.detailPageUrl || `projects/${project.id}/index.html`;
-    projectLink.setAttribute('aria-label', `查看项目：${project.title}`);
+    projectLink.setAttribute('aria-label', `View project: ${project.title}`);
     
-    // 创建缩略图
     const thumbnail = document.createElement('img');
     thumbnail.src = `projects/${project.id}/${project.thumbnailUrl}` || '';
-    thumbnail.alt = project.title + ' 缩略图';
+    thumbnail.alt = project.title + ' thumbnail';
     thumbnail.classList.add('project-thumbnail');
     
-    // 缩略图加载失败处理
     thumbnail.onerror = function() {
-        console.warn(`项目缩略图加载失败: ${project.title}`);
-        this.src = generatePlaceholderImage('项目图片', 400, 300);
+        console.warn(`Project thumbnail failed to load: ${project.title}`);
+        this.src = generatePlaceholderImage('Project Image', 160, 100);
     };
     
-    // 创建项目信息容器
     const projectInfo = document.createElement('div');
     projectInfo.classList.add('project-info');
     
-    // 创建项目标题
     const title = document.createElement('h3');
     title.textContent = project.title;
     
-    // 创建项目描述
     const description = document.createElement('p');
-    description.textContent = project.shortDescription || '暂无描述';
+    description.textContent = project.shortDescription || 'No description available';
     
-    // 组装元素
     projectInfo.appendChild(title);
     projectInfo.appendChild(description);
     projectLink.appendChild(thumbnail);
@@ -486,39 +348,54 @@ window.addEventListener('beforeunload', () => {
     // 可以在这里添加清理逻辑
     // 例如：保存用户状态、清理定时器等
 });
+function createErrorProjectCard(projectRef) {
+    const projectCard = document.createElement('div');
+    projectCard.classList.add('project-card');
+    
+    const projectInfo = document.createElement('div');
+    projectInfo.classList.add('project-info');
+    projectInfo.style.textAlign = 'center';
+    projectInfo.style.padding = '20px';
+    
+    const title = document.createElement('h3');
+    title.textContent = 'Project Unavailable';
+    title.style.color = '#e74c3c';
+    
+    const description = document.createElement('p');
+    description.textContent = 'Unable to load project information';
+    
+    projectInfo.appendChild(title);
+    projectInfo.appendChild(description);
+    projectCard.appendChild(projectInfo);
+    
+    return projectCard;
+}
 
 /* ==========================================
- * 性能优化和错误处理
+ * Utility Functions
  * ==========================================
  */
 
-/**
- * 全局错误处理器
- * 捕获和记录未处理的JavaScript错误
- */
-window.addEventListener('error', (event) => {
-    console.error('全局错误捕获:', {
-        message: event.message,
-        filename: event.filename,
-        lineno: event.lineno,
-        colno: event.colno,
-        error: event.error
-    });
+function generatePlaceholderImage(text, width, height) {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
     
-    // 在生产环境中，可以将错误信息发送到日志服务
-    // 这里只是在控制台记录
-});
-
-/**
- * Promise错误处理器
- * 捕获未处理的Promise rejection
- */
-window.addEventListener('unhandledrejection', (event) => {
-    console.error('未处理的Promise rejection:', event.reason);
+    ctx.fillStyle = '#ecf0f1';
+    ctx.fillRect(0, 0, width, height);
     
-    // 防止在控制台显示默认的错误信息
-    event.preventDefault();
-});
+    ctx.fillStyle = '#7f8c8d';
+    ctx.font = '14px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(text, width / 2, height / 2 + 5);
+    
+    return canvas.toDataURL();
+}
 
-// 文件结束标记
-console.log('个人学术主页JavaScript文件加载完成 - Version 3.0');
+function updateFooter() {
+    const currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
+}
