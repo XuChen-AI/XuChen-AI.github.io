@@ -1,78 +1,33 @@
-{    "personalInfo": {
-        "userName": "Dr. Xu Chen",
+{
+    "personalInfo": {
+        "userName": "Xu Chen",
         "userBio": "A passionate researcher in Artificial Intelligence and Computer Vision. Currently focusing on deep learning applications in medical image analysis and autonomous driving technologies.",
         "avatarImageUrl": "assets/images/avatar.svg",
         "headerBackgroundImageUrl": "assets/images/background.svg",
         "email": "xuchen@example.edu",
         "university": "Zhejiang University",
         "department": "College of Computer Science and Technology"
-    },    "siteSettings": {
-        "title": "Dr. Xu Chen - Academic Homepage",
+    },
+    "siteSettings": {
+        "title": "Xu Chen - Academic Homepage",
         "description": "Personal academic homepage showcasing research projects and achievements in AI, computer vision, and deep learning.",
         "keywords": "Artificial Intelligence, Deep Learning, Computer Vision, Academic Research, Machine Learning"
-    },"projects": [        {
+    },
+    "projects": [
+        {
             "id": "project1",
-            "thumbnailUrl": "projects/project1/images/project1-thumb.svg",
-            "title": "AI-Assisted Medical Diagnosis System",
-            "shortDescription": "Advanced deep learning system for early disease detection with 95%+ accuracy.",
-            "detailPageUrl": "projects/project1/index.html",            "detailContent": {
-                "images": [
-                    "projects/project1/images/demo1.svg",
-                    "projects/project1/images/architecture.svg"
-                ],
-                "videos": [
-                    "projects/project1/videos/demo_video.mp4",
-                    "projects/project1/videos/presentation.mp4"
-                ],
-                "textFile": "projects/project1/texts/description.md",
-                "fullDescription": "<p>This project focuses on developing an advanced AI-assisted medical diagnosis system using deep learning technologies. Our system achieves 95%+ accuracy in early disease detection.</p><p>Key technical components include:</p><ul><li>Deep Convolutional Neural Networks (CNNs)</li><li>Recurrent Neural Networks (RNNs)</li><li>Data Augmentation Techniques</li><li>Transfer Learning</li></ul>",
-                "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                "githubUrl": "https://github.com/your-username/ai-diagnosis-system",
-                "paperUrl": "https://arxiv.org/abs/xxxx.xxxx",
-                "tags": ["Deep Learning", "Medical Imaging", "AI Diagnosis"]
-            }
-        },        {
+            "configPath": "projects/project1/config/config.json",
+            "detailPageUrl": "projects/project1/index.html"
+        },
+        {
             "id": "project2",
-            "thumbnailUrl": "projects/project2/images/project2-thumb.svg",
-            "title": "Personalized Learning Recommendation Engine",
-            "shortDescription": "Intelligent learning resource recommendation system based on student behavior analysis.",
-            "detailPageUrl": "projects/project2/index.html",
-            "detailContent": {                "images": [
-                    "projects/project2/images/system-overview.svg",
-                    "projects/project2/images/results.svg"
-                ],
-                "videos": [
-                    "projects/project2/videos/system_demo.mp4",
-                    "projects/project2/videos/user_interface.mp4"
-                ],
-                "textFile": "projects/project2/texts/description.md",
-                "fullDescription": "<p>This project focuses on building an intelligent learning recommendation system that analyzes student learning behaviors and preferences to provide personalized educational content recommendations.</p><p>Key innovations include:</p><ul><li>Multi-modal learning behavior analysis</li><li>Adaptive recommendation algorithms</li><li>Real-time learning effectiveness assessment</li><li>Cross-domain knowledge transfer</li></ul>",
-                "videoUrl": null,
-                "githubUrl": "https://github.com/your-username/learning-recommendation",
-                "paperUrl": "https://doi.org/10.1145/example.paper2",
-                "tags": ["Machine Learning", "Recommendation Systems", "Educational Technology"]
-            }
-        },        {
+            "configPath": "projects/project2/config/config.json",
+            "detailPageUrl": "projects/project2/index.html"
+        },
+        {
             "id": "project3",
-            "thumbnailUrl": "projects/project3/images/project3-thumb.svg",
-            "title": "Autonomous Driving Perception Algorithms",
-            "shortDescription": "Advanced perception algorithms for autonomous vehicles with high-precision environmental understanding.",
-            "detailPageUrl": "projects/project3/index.html",
-            "detailContent": {                "images": [
-                    "projects/project3/images/perception-pipeline.svg",
-                    "projects/project3/images/detection-results.svg"
-                ],
-                "videos": [
-                    "projects/project3/videos/driving_demo.mp4",
-                    "projects/project3/videos/real_road_test.mp4"
-                ],
-                "textFile": "projects/project3/texts/description.md",
-                "fullDescription": "<p>This project aims to enhance the perception capabilities of autonomous vehicles in complex environments through advanced multi-sensor fusion technologies and robust algorithmic frameworks.</p><p>Research achievements include:</p><ul><li>Multi-sensor data fusion algorithms</li><li>Real-time object detection and tracking</li><li>3D point cloud processing techniques</li><li>Robustness enhancement in adverse weather conditions</li></ul>",
-                "videoUrl": "https://www.youtube.com/embed/autonomous-perception-demo",
-                "githubUrl": "https://github.com/your-username/autonomous-perception",
-                "paperUrl": "https://doi.org/10.1109/example.paper3",
-                "tags": ["Autonomous Driving", "Computer Vision", "Sensor Fusion"]
-            }
+            "configPath": "projects/project3/config/config.json",
+            "detailPageUrl": "projects/project3/index.html"
         }
     ],
     "socialLinks": {

@@ -1,0 +1,28 @@
+{
+    "projectInfo": {
+        "id": "project3",
+        "title": "Autonomous Driving Perception Algorithms",
+        "shortDescription": "Advanced perception algorithms for autonomous vehicles with high-precision environmental understanding.",
+        "thumbnailUrl": "images/project3-thumb.svg",
+        "backgroundUrl": "images/project3-bg.svg"
+    },
+    "content": {
+        "images": [
+            "images/perception-pipeline.svg",
+            "images/detection-results.svg",
+            "images/methodology-framework.svg"
+        ],
+        "videos": [
+            "videos/driving_demo.mp4",
+            "videos/real_road_test.mp4"
+        ],
+        "textFile": "texts/description.md",
+        "fullDescription": "<p>This project aims to enhance the perception capabilities of autonomous vehicles in complex environments through advanced multi-sensor fusion technologies and robust algorithmic frameworks.</p><p>Research achievements include:</p><ul><li>Multi-sensor data fusion algorithms</li><li>Real-time object detection and tracking</li><li>3D point cloud processing techniques</li><li>Robustness enhancement in adverse weather conditions</li></ul>"
+    },
+    "links": {
+        "videoUrl": "https://www.youtube.com/embed/autonomous-perception-demo",
+        "githubUrl": "https://github.com/your-username/autonomous-perception",
+        "paperUrl": "https://doi.org/10.1109/example.paper3"
+    },
+    "tags": ["Autonomous Driving", "Computer Vision", "Sensor Fusion"]
+}

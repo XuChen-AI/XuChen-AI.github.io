@@ -38,31 +38,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadConfig() {
     try {
-        const response = await fetch('../../config/config.json');
+        // 优先加载本地项目配置
+        const response = await fetch('config/config.json');
         if (!response.ok) {
             throw new Error(`HTTP错误! 状态: ${response.status}`);
         }
         config = await response.json();
-        console.log('配置文件加载成功');
+        console.log('项目配置文件加载成功');
     } catch (error) {
-        console.error('配置文件加载失败:', error);
-        throw error;
+        console.error('项目配置文件加载失败:', error);
+        // 尝试加载主配置文件作为后备
+        try {
+            const response = await fetch('../../config/config.json');
+            if (!response.ok) {
+                throw new Error(`HTTP错误! 状态: ${response.status}`);
+            }
+            const mainConfig = await response.json();
+            const project = mainConfig.projects.find(p => p.id === PROJECT_ID);
+            if (project) {
+                config = { projectInfo: project };
+            }
+        } catch (fallbackError) {
+            console.error('主配置文件也加载失败:', fallbackError);
+            throw error;
+        }
     }
 }
 
 function useDefaultConfig() {
     config = {
-        projects: [{
+        projectInfo: {
             id: PROJECT_ID,
             title: 'AI-Assisted Medical Diagnosis System',
-            detailContent: {
-                images: ['images/demo1.svg', 'images/architecture.svg'],
-                videos: ['videos/demo_video.mp4'],
-                textFile: 'texts/description.md',
-                githubUrl: 'https://github.com/your-username/ai-diagnosis-system',
-                tags: ['Deep Learning', 'Medical Imaging', 'AI Diagnosis']
-            }
-        }]
+            shortDescription: 'Advanced deep learning system for early disease detection with 95%+ accuracy.',
+            thumbnailUrl: 'images/project1-thumb.svg',
+            backgroundUrl: 'images/project1-bg.svg'
+        },
+        content: {
+            images: ['images/demo1.svg', 'images/architecture.svg'],
+            videos: ['videos/demo_video.mp4'],
+            textFile: 'texts/description.md',
+            fullDescription: '<p>This project focuses on developing an advanced AI-assisted medical diagnosis system using deep learning technologies.</p>'
+        },
+        links: {
+            githubUrl: 'https://github.com/your-username/ai-diagnosis-system',
+            paperUrl: 'https://arxiv.org/abs/xxxx.xxxx',
+            videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        },
+        tags: ['Deep Learning', 'Medical Imaging', 'AI Diagnosis']
     };
 }
 
@@ -72,21 +95,21 @@ function useDefaultConfig() {
  */
 
 function initializeProjectPage() {
-    const project = config.projects.find(p => p.id === PROJECT_ID);
-    if (project) {
-        renderProjectDetails(project);
+    if (config && config.projectInfo) {
+        renderProjectDetails(config);
     } else {
         renderProjectNotFound();
     }
 }
 
-function renderProjectDetails(project) {
+function renderProjectDetails(projectConfig) {
     const detailContainer = document.getElementById('project-detail-content');
     if (!detailContainer) {
         console.error('未找到项目详情容器元素');
         return;
     }
 
+    const project = projectConfig.projectInfo;
     console.log('开始渲染项目详情:', project.title);
     
     // 更新页面标题

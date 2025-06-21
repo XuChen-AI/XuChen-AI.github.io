@@ -38,31 +38,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadConfig() {
     try {
-        const response = await fetch('../../config/config.json');
+        // 优先加载本地项目配置
+        const response = await fetch('config/config.json');
         if (!response.ok) {
             throw new Error(`HTTP错误! 状态: ${response.status}`);
         }
         config = await response.json();
-        console.log('配置文件加载成功');
+        console.log('项目配置文件加载成功');
     } catch (error) {
-        console.error('配置文件加载失败:', error);
-        throw error;
+        console.error('项目配置文件加载失败:', error);
+        // 尝试加载主配置文件作为后备
+        try {
+            const response = await fetch('../../config/config.json');
+            if (!response.ok) {
+                throw new Error(`HTTP错误! 状态: ${response.status}`);
+            }
+            const mainConfig = await response.json();
+            const project = mainConfig.projects.find(p => p.id === PROJECT_ID);
+            if (project) {
+                config = { projectInfo: project };
+            }
+        } catch (fallbackError) {
+            console.error('主配置文件也加载失败:', fallbackError);
+            throw error;
+        }
     }
 }
 
 function useDefaultConfig() {
     config = {
-        projects: [{
+        projectInfo: {
             id: PROJECT_ID,
             title: 'Personalized Learning Recommendation Engine',
-            detailContent: {
-                images: ['images/system-overview.svg', 'images/results.svg'],
-                videos: ['videos/system_demo.mp4'],
-                textFile: 'texts/description.md',
-                githubUrl: 'https://github.com/your-username/learning-recommendation',
-                tags: ['Recommendation System', 'Personalized Learning', 'Data Mining']
-            }
-        }]
+            shortDescription: 'Intelligent learning resource recommendation system based on student behavior analysis.',
+            thumbnailUrl: 'images/project2-thumb.svg',
+            backgroundUrl: 'images/project2-bg.svg'
+        },
+        content: {
+            images: ['images/system-overview.svg', 'images/results.svg'],
+            videos: ['videos/system_demo.mp4'],
+            textFile: 'texts/description.md',
+            fullDescription: '<p>This project focuses on building an intelligent learning recommendation system.</p>'
+        },
+        links: {
+            githubUrl: 'https://github.com/your-username/learning-recommendation',
+            paperUrl: 'https://doi.org/10.1145/example.paper2',
+            videoUrl: null
+        },
+        tags: ['Machine Learning', 'Recommendation Systems', 'Educational Technology']
     };
 }
 
@@ -72,15 +95,14 @@ function useDefaultConfig() {
  */
 
 function initializeProjectPage() {
-    const project = config.projects.find(p => p.id === PROJECT_ID);
-    if (project) {
-        renderProjectDetails(project);
+    if (config && config.projectInfo) {
+        renderProjectDetails(config);
     } else {
         renderProjectNotFound();
     }
 }
 
-function renderProjectDetails(project) {
+function renderProjectDetails(projectConfig) {
     const detailContainer = document.getElementById('project-detail-content');
     if (!detailContainer) {
         console.error('未找到项目详情容器元素');

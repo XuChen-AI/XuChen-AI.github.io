@@ -53,15 +53,16 @@ let config = null;
  * DOM内容加载完成时的初始化函数
  * 这是整个应用的入口点，负责启动所有核心功能
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // 尝试从配置文件加载数据，如果失败则使用默认配置
-    loadConfig().then(() => {
-        initializePage();
-    }).catch(() => {
+    try {
+        await loadConfig();
+        await initializePage();
+    } catch (error) {
         console.warn('无法加载配置文件，使用默认配置');
         useDefaultConfig();
-        initializePage();
-    });
+        await initializePage();
+    }
 });
 
 /* ==========================================
@@ -162,11 +163,11 @@ function useDefaultConfig() {
  * 初始化页面所有内容
  * 协调各个模块的初始化过程
  */
-function initializePage() {
+async function initializePage() {
     console.log('开始初始化页面...');
     
     updatePersonalInfo();
-    loadProjects();
+    await loadProjects(); // 异步加载项目
     updateFooter();
     
     console.log('页面初始化完成');
@@ -238,7 +239,7 @@ function updatePersonalInfo() {
  * 加载并显示项目列表
  * 在主页中动态生成项目卡片网格
  */
-function loadProjects() {
+async function loadProjects() {
     const projectsGrid = document.getElementById('projects-grid');
     if (!projectsGrid) {
         console.warn('未找到项目网格容器元素');
@@ -254,30 +255,55 @@ function loadProjects() {
     // 清空现有内容
     projectsGrid.innerHTML = '';
     
-    // 为每个项目创建卡片
-    config.projects.forEach((project, index) => {
+    // 为每个项目动态加载配置并创建卡片
+    for (const projectRef of config.projects) {
         try {
-            const projectCard = createProjectCard(project);
+            const projectConfig = await loadProjectConfig(projectRef.configPath);
+            const projectCard = createProjectCard(projectConfig, projectRef);
             projectsGrid.appendChild(projectCard);
-            console.log(`项目卡片已创建: ${project.title}`);
+            console.log(`项目卡片已创建: ${projectConfig.projectInfo.title}`);
         } catch (error) {
-            console.error(`创建项目卡片失败 (项目 ${index + 1}):`, error);
+            console.error(`加载项目配置失败 (${projectRef.id}):`, error);
+            // 创建错误占位卡片
+            const errorCard = createErrorProjectCard(projectRef);
+            projectsGrid.appendChild(errorCard);
         }
-    });
+    }
     
     console.log(`成功加载 ${config.projects.length} 个项目`);
 }
 
 /**
+ * 加载单个项目的配置文件
+ * @param {string} configPath - 项目配置文件路径
+ * @returns {Promise<Object>} 项目配置对象
+ */
+async function loadProjectConfig(configPath) {
+    try {
+        const response = await fetch(configPath);
+        if (!response.ok) {
+            throw new Error(`HTTP错误! 状态: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`加载项目配置失败: ${configPath}`, error);
+        throw error;
+    }
+}
+
+/**
  * 创建单个项目卡片元素
- * @param {Object} project - 项目数据对象
+ * @param {Object} projectConfig - 项目配置数据对象
+ * @param {Object} projectRef - 项目引用对象
  * @returns {HTMLElement} 项目卡片DOM元素
  */
-function createProjectCard(project) {
+function createProjectCard(projectConfig, projectRef) {
     // 验证项目数据
-    if (!project || !project.title) {
+    if (!projectConfig || !projectConfig.projectInfo || !projectConfig.projectInfo.title) {
         throw new Error('项目数据无效：缺少必要字段');
     }
+    
+    const project = projectConfig.projectInfo;
     
     // 创建项目卡片容器
     const projectCard = document.createElement('div');
@@ -285,12 +311,12 @@ function createProjectCard(project) {
     
     // 创建项目链接
     const projectLink = document.createElement('a');
-    projectLink.href = project.detailPageUrl || `projects/${project.id}.html`;
+    projectLink.href = projectRef.detailPageUrl || `projects/${project.id}/index.html`;
     projectLink.setAttribute('aria-label', `查看项目：${project.title}`);
     
     // 创建缩略图
     const thumbnail = document.createElement('img');
-    thumbnail.src = project.thumbnailUrl || '';
+    thumbnail.src = `projects/${project.id}/${project.thumbnailUrl}` || '';
     thumbnail.alt = project.title + ' 缩略图';
     thumbnail.classList.add('project-thumbnail');
     
@@ -318,6 +344,32 @@ function createProjectCard(project) {
     projectLink.appendChild(thumbnail);
     projectLink.appendChild(projectInfo);
     projectCard.appendChild(projectLink);
+    
+    return projectCard;
+}
+
+/**
+ * 创建错误项目卡片（当项目配置加载失败时使用）
+ * @param {Object} projectRef - 项目引用对象
+ * @returns {HTMLElement} 错误卡片DOM元素
+ */
+function createErrorProjectCard(projectRef) {
+    const projectCard = document.createElement('div');
+    projectCard.classList.add('project-card', 'error-card');
+    
+    const projectInfo = document.createElement('div');
+    projectInfo.classList.add('project-info');
+    
+    const title = document.createElement('h3');
+    title.textContent = `项目 ${projectRef.id}`;
+    
+    const description = document.createElement('p');
+    description.textContent = '项目配置加载失败';
+    description.style.color = '#e74c3c';
+    
+    projectInfo.appendChild(title);
+    projectInfo.appendChild(description);
+    projectCard.appendChild(projectInfo);
     
     return projectCard;
 }

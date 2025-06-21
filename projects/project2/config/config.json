@@ -1,0 +1,28 @@
+{
+    "projectInfo": {
+        "id": "project2",
+        "title": "Personalized Learning Recommendation Engine",
+        "shortDescription": "Intelligent learning resource recommendation system based on student behavior analysis.",
+        "thumbnailUrl": "images/project2-thumb.svg",
+        "backgroundUrl": "images/project2-bg.svg"
+    },
+    "content": {
+        "images": [
+            "images/system-overview.svg",
+            "images/results.svg",
+            "images/methodology-framework.svg"
+        ],
+        "videos": [
+            "videos/system_demo.mp4",
+            "videos/user_interface.mp4"
+        ],
+        "textFile": "texts/description.md",
+        "fullDescription": "<p>This project focuses on building an intelligent learning recommendation system that analyzes student learning behaviors and preferences to provide personalized educational content recommendations.</p><p>Key innovations include:</p><ul><li>Multi-modal learning behavior analysis</li><li>Adaptive recommendation algorithms</li><li>Real-time learning effectiveness assessment</li><li>Cross-domain knowledge transfer</li></ul>"
+    },
+    "links": {
+        "videoUrl": null,
+        "githubUrl": "https://github.com/your-username/learning-recommendation",
+        "paperUrl": "https://doi.org/10.1145/example.paper2"
+    },
+    "tags": ["Machine Learning", "Recommendation Systems", "Educational Technology"]
+}
