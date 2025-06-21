@@ -94,11 +94,10 @@ function updatePersonalInfo() {
     if (userNameElement) {
         userNameElement.textContent = personalInfo.userName;
     }
-    
-    // Update bio
+      // Update bio
     const userBioElement = document.getElementById('user-bio');
     if (userBioElement) {
-        userBioElement.textContent = personalInfo.userBio;
+        userBioElement.innerHTML = personalInfo.userBio;
     }
     
     // Update avatar
