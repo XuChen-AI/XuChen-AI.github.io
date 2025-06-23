@@ -60,8 +60,7 @@ function useDefaultConfig() {
         personalInfo: {
             userName: "Your Name",
             userBio: "Your academic bio and research interests.",
-            avatarImageUrl: "assets/images/avatar.svg",
-            headerBackgroundImageUrl: "assets/images/background.svg"
+            avatarImageUrl: "assets/images/avatar.svg"
         },
         projects: []
     };
@@ -101,8 +100,7 @@ function updatePersonalInfo() {
     if (userBioElement) {
         userBioElement.innerHTML = personalInfo.userBio;
     }
-    
-    // Update avatar
+      // Update avatar
     const avatarElement = document.getElementById('avatar');
     if (avatarElement) {
         avatarElement.src = personalInfo.avatarImageUrl;
@@ -111,18 +109,6 @@ function updatePersonalInfo() {
         avatarElement.onerror = function() {
             console.warn('Avatar image failed to load');
             this.src = generatePlaceholderImage('Avatar', 120, 120);
-        };
-    }
-    
-    // Update background image
-    const backgroundElement = document.getElementById('background');
-    if (backgroundElement && personalInfo.headerBackgroundImageUrl) {
-        backgroundElement.src = personalInfo.headerBackgroundImageUrl;
-        backgroundElement.alt = 'Background image';
-        
-        backgroundElement.onerror = function() {
-            console.warn('Background image failed to load');
-            this.style.display = 'none';
         };
     }
     

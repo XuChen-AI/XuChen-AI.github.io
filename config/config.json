@@ -1,9 +1,7 @@
-{
-    "personalInfo": {
+{    "personalInfo": {
         "userName": "Xu Chen",
         "userBio": "I am currently a Master's student at <a href='https://www.zju.edu.cn/' target='_blank' style='color: #3498db; text-decoration: none;'>Zhejiang University</a>, <a href='http://me.zju.edu.cn/' target='_blank' style='color: #3498db; text-decoration: none;'>School of Mechanical Engineering</a>. My research focuses on disassembly planning for end-of-life product recycling. I am supervised by Professor <a href='https://person.zju.edu.cn/gaoyicong#0' target='_blank' style='color: #3498db; text-decoration: none;'>Yicong Gao</a>.<br><br>Contact: <a href='https://github.com/XuChen-AI' target='_blank' style='color: #3498db; text-decoration: none;'>GitHub</a> | <a href='mailto:22325069@zju.edu.cn' style='color: #3498db; text-decoration: none;'>Email</a>",
         "avatarImageUrl": "assets/images/avatar.svg",
-        "headerBackgroundImageUrl": "assets/images/background.svg",
         "email": "xuchen@zju.edu.cn",
         "university": "Zhejiang University",
         "department": "College of Mechanical Engineering"
