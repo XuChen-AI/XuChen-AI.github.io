@@ -1,3 +1,3 @@
 title: "GraspMind"
-description: "Context-Aware Functional Robotic Grasping for Safe Human-Robot Interaction."
+description: "GraspMind is an advanced robotic grasping system centered around a multi-agent framework to enable safe and intuitive human-robot interaction. The system empowers robots to make intelligent grasping decisions by interpreting contextual cues and inferring human intent. This innovative technology fosters a safer and more efficient collaborative environment where robots can seamlessly assist humans in a variety of tasks while upholding stringent safety standards and operational effectiveness."
 github: "https://github.com/XuChen-AI/GraspMind"

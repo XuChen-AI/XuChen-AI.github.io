@@ -1,3 +1,3 @@
 title: "CoAudit"
-description: "Multi-Agent Evaluation Framework."
+description: "CoAudit is a research framework that enhances collaborative evaluation through multi-agent dialogic systems. The platform orchestrates specialized AI agents in structured deliberation phases, simulating expert committee processes for comprehensive assessment of complex engineering systems. By integrating automated analysis with human-centric workflows, CoAudit bridges traditional evaluation gaps through intelligent agent collaboration and iterative refinement methodologies."
 github: "https://github.com/XuChen-AI/CoAudit"
